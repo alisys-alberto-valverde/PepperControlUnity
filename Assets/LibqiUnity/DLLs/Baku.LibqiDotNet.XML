@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baku.LibqiDotNet</name>
+    </assembly>
+    <members>
+        <member name="T:Baku.LibqiDotNet.Path.PathModifier">
+            <summary>アンマネージライブラリの参照パスを追加するためのユーティリティ処理を提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Path.PathModifier.AddEnvironmentPath(System.String,Baku.LibqiDotNet.Path.PathModifyMode)">
+            <summary>
+            指定したディレクトリを起点とし、環境変数のPATHをプロセス内限定で変更することで
+            アンマネージライブラリの参照パスを追加します。
+            </summary>
+            <param name="path">指定したディレクトリからの相対パス。親ディレクトリ側を指さないことが推奨されます。</param>
+            <param name="modifyMode">起点となるディレクトリの種類</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Path.PathModifyMode">
+            <summary>
+            <see cref="M:Baku.LibqiDotNet.Path.PathModifier.AddEnvironmentPath(System.String)"/>関数において
+            指定するディレクトリの起点の種類を表します。
+            </summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Path.PathModifyMode.RelativeToEntryAssembly">
+            <summary>プロセス全体を実行しているexeファイルのディレクトリを起点とします。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Path.PathModifyMode.RelativeToExecutingAssembly">
+            <summary>このライブラリを含むアセンブリファイルが存在するディレクトリを起点とします。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Path.PathModifyMode.RelativeToWorkingDirectory">
+            <summary>作業ディレクトリを起点とします。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.QiSessionFactory">
+            <summary>実際のWebSocket実装が導入されたQiSessionのファクトリを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSessionFactory.GetWebSocket">
+            <summary>実際のWebSocket実装を取得します。</summary>
+            <returns>実装されたWebSocket</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.WebSocketImpl.WebSocket">
+            <summary>WebSocket4NetによるWebSocketクライアントの実装を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.WebSocketImpl.WebSocket.AllowUnstrustedCertificate">
+            <summary>信頼されていない接続先を許可するかを取得、設定します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.WebSocketImpl.WebSocket.EnableAutoSendPing">
+            <summary>自動でpingを送信するかを取得、設定します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.WebSocketImpl.WebSocket.State">
+            <summary>WebSocketの現在の接続状態を取得します。</summary>
+        </member>
+        <member name="E:Baku.LibqiDotNet.WebSocketImpl.WebSocket.Opened">
+            <summary>接続が確立されると発生します。</summary>
+        </member>
+        <member name="E:Baku.LibqiDotNet.WebSocketImpl.WebSocket.Closed">
+            <summary>メッセージを受信すると発生します。</summary>
+        </member>
+        <member name="E:Baku.LibqiDotNet.WebSocketImpl.WebSocket.Error">
+            <summary>通信にエラーが生じると発生します。</summary>
+        </member>
+        <member name="E:Baku.LibqiDotNet.WebSocketImpl.WebSocket.MessageReceived">
+            <summary>接続が切断すると発生します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.WebSocketImpl.WebSocket.InitializeUrl(System.String)">
+            <summary>接続先のURLを指定して初期化します。</summary>
+            <param name="url">接続先URL</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.WebSocketImpl.WebSocket.Open">
+            <summary>初期化時に指定したURLへ接続します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.WebSocketImpl.WebSocket.Send(System.String)">
+            <summary>メッセージを送信します。</summary>
+            <param name="msg">送信するメッセージ</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.WebSocketImpl.WebSocket.Close">
+            <summary>接続を切断します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.QiSession">
+            <summary>2種類の異なる通信セッション<see cref="T:Baku.LibqiDotNet.IQiSession"/>をあまり区別せずに扱うためのクラスです。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.QiSession.Port">
+            <summary>接続先のポート番号を取得、設定します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.QiSession.Protocol">
+            <summary>初期接続時に用いるプロトコル文字列("tcp://"または"http://")を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.ConnectAsync(System.String)">
+            <summary>指定したアドレスへの接続を試みます。</summary>
+            <param name="address">接続したいアドレス(IPアドレスで"192.168.xxx.xx"のような形で指定)</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.QiSession.IsConnected">
+            <summary>セッションが接続済みであるかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.Close">
+            <summary>セッションを閉じます。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.GetServiceAsync(System.String)">
+            <summary>サービス名を指定してサービスを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.QiSession.IsServiceRegistrationSupported">
+            <summary>実際のインスタンスがサービス登録/解除をサポートしているかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.ListenAsync(System.String,System.Boolean)">
+            <summary>セッションをリスンします。</summary>
+            <param name="address">リスン先アドレスです。例えばアクセスを制限しない場合は"tcp://0.0.0.0:0"を指定します。</param>
+            <param name="standAlone">アプリケーションがスタンドアロンである場合はtrueにします。通常は設定する必要はありません。</param>
+            <returns>リスン結果への予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.RegisterServiceAsync(System.String,Baku.LibqiDotNet.IQiObject)">
+            <summary>サービスに名前を付けて登録します。</summary>
+            <param name="name">登録するサービス名</param>
+            <param name="obj">登録するサービス本体</param>
+            <returns><see cref="M:Baku.LibqiDotNet.QiSession.UnregisterServiceAsync(System.UInt32)"/>の引数で渡すためのIDをGetUInt64で取得してください。</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.UnregisterServiceAsync(System.UInt32)">
+            <summary>IDを指定し、サービスの登録を解除します。</summary>
+            <param name="idx">解除したいサービスにつけられたID</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSession.GetEndpoints">
+            <summary>
+            セッションのエンドポイント情報を取得します。
+            [TODO]エンドポイントの型情報が分かったら内容をI/F化すること
+            </summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.QiSession.DefaultTcpPort">
+            <summary>直接TCP接続する場合の既定の接続ポート番号です。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.QiSession.DefaultHttpPort">
+            <summary>HTTPで接続する場合の既定の接続ポート番号です。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.QiSession.TcpProtocolPrefix">
+            <summary>直接TCP接続する場合のプロトコル文字列です。URLの指定時に用います。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.QiSession.HttpProtocolPrefix">
+            <summary>HTTPで接続する場合のプロトコル文字列です。URLの指定時に用います。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.QiSessionFactoryBase">
+            <summary>
+            LibqiまたはSocket.io実装のセッションを生成する抽象的なファクトリを表します。
+            </summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSessionFactoryBase.CreateLibqiSession">
+            <summary>
+            ネイティブライブラリをラップした実装のセッションを作成します。
+            実行中のプラットフォームによってはサポートされていないことに注意して使用してください。
+            </summary>
+            <returns>セッション</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSessionFactoryBase.CreateSocketIoSession">
+            <summary>
+            Socket.IOクライアントベースで実装されたセッションを作成します。
+            この実装ではLibqiの一部機能が利用できないことに注意して使用してください。
+            </summary>
+            <returns>セッション</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiSessionFactoryBase.GetWebSocket">
+            <summary>
+            サブクラスでオーバーライドすることでWebSocketの実装を提供します。
+            オーバーライドされない場合WebSocketによる接続はできないことに注意してください。
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

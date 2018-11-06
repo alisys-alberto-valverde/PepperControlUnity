@@ -1,0 +1,1686 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baku.LibqiDotNet.Libqi</name>
+    </assembly>
+    <members>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiValueKind">
+            <summary>Qiで使われる値の型一覧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiInvalid">
+            <summary>無効な値</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiUnknown">
+            <summary>不明な値。エラーを表す場合もある</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiVoid">
+            <summary>戻り値が無いことを示す。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiInt">
+            <summary>整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiFloat">
+            <summary>小数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiString">
+            <summary>文字列型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiList">
+            <summary>配列型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiMap">
+            <summary>マップ(辞書)型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiObject">
+            <summary>オブジェクト型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiPointer">
+            <summary>ポインタ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiTuple">
+            <summary>タプル型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiDynamic">
+            <summary>動的型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiRaw">
+            <summary>バイナリ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiValueKind.QiIterator">
+            <summary>イテレータ型</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiTypeKind">
+            <summary>Qiで使われる型一覧。<see cref="T:Baku.LibqiDotNet.Libqi.QiValueKind"/>との違いに注意</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiInvalid">
+            <summary>無効な値</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiUnknown">
+            <summary>未知の値。エラーを表すこともある</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiVoid">
+            <summary>戻り値が無い事を表す値</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiInt">
+            <summary>整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiFloat">
+            <summary>小数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiString">
+            <summary>文字列型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiList">
+            <summary>配列型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiMap">
+            <summary>マップ(辞書)型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiObject">
+            <summary>オブジェクト型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiPointer">
+            <summary>ポインタ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiTuple">
+            <summary>タプル型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiDynamic">
+            <summary>動的型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiRaw">
+            <summary>バイナリ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiIterator">
+            <summary>イテレータ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiFunction">
+            <summary>関数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiSignal">
+            <summary>シグナル型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiProperty">
+            <summary>プロパティ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiTypeKind.QiVarargs">
+            <summary>可変長引数型</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApplication">
+            <summary>アプリケーションを表します。初期化処理等を行うために用います</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiApplication.Run">
+            <summary>サーバとしてアプリケーションを実行します。クライアントでは呼び出しは必要ありません。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiApplication.Stop">
+            <summary>アプリケーションを停止します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiApplication.IsApplicationInitialized">
+            <summary>アプリケーションが初期化済みであるかどうかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiApplication.Create(System.String[])">
+            <summary>コマンドライン相当の入力を受けて初期化されたアプリケーションを取得します。</summary>
+            <param name="args">コマンドラインに相当する入力。長さが0の場合<see cref="T:System.InvalidOperationException"/>が発生します。</param>
+            <returns>初期化されたアプリケーション</returns>
+            <exception cref="T:System.InvalidOperationException"/>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiFuture">
+            <summary>非同期的にリクエストの戻り値を受け取るコンテナを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.Wait(System.Int32)">
+            <summary>指定した時間まで待機します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.Wait">
+            <summary>無期限に待機します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.CheckHasError(System.Int32)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.CheckHasError">
+            <summary>エラーが起きたかどうかを無期限待機ののち確認します。</summary>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.CheckHasValue(System.Int32)">
+            <summary>値を持っているかどうかを待機ののち確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.CheckHasValue">
+            <summary>値を持っているかどうかを無期限待機ののち確認します。</summary>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.Cancel">
+            <summary>結果取得をキャンセルします。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.IsRunning">
+            <summary>処理が実行中であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.IsFinished">
+            <summary>処理が終了済であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.IsCanceled">
+            <summary>処理がキャンセル済みであるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.HasError">
+            <summary>処理がエラー終了したかどうかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.ErrorMessage">
+            <summary>エラーがある場合、それを文字列として取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.AddCallback(System.Action)">
+            <summary>処理完了時に呼ばれるコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.GetValue">
+            <summary>一般的な処理結果を取得します。</summary>
+            <returns>呼び出し結果。完了待機や戻り値の有効性チェックが適切に行われていない場合、例外が生じる可能性があります。</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.GetInt64(System.Int64)">
+            <summary>結果を符号つき整数として取得します。</summary>
+            <returns>呼び出し結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.GetUInt64(System.UInt64)">
+            <summary>結果を符号なし整数として取得します。</summary>
+            <returns>呼び出し結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.GetString">
+            <summary>結果を文字列として取得します。</summary>
+            <returns>呼び出し結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.GetObject">
+            <summary>結果を<see cref="T:Baku.LibqiDotNet.Libqi.QiObject"/>として取得します。</summary>
+            <returns>呼び出し結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture.AddCallback(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>
+            非同期処理の終了時に呼び出すコールバック関数を登録します。
+            既に処理が終わっている場合はコールバック関数がただちに非同期で呼び出されます。
+            </summary>
+            <param name="callback">処理終了時のコールバック</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.NoneTimeout">
+            <summary>待機を行わないことを表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture.InfiniteTimeout">
+            <summary>無期限の待機を表します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiFuture`1">
+            <summary><see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>のうち戻り値の型が明示されたものを表します。</summary>
+            <typeparam name="T">戻り値の型</typeparam>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.#ctor(Baku.LibqiDotNet.Libqi.QiFuture)">
+            <summary>元となる<see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>値を用いてインスタンスを初期化します。</summary>
+            <param name="future">元となる非同期呼び出しデータ</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture`1.IsRunning">
+            <summary>処理が実行中であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture`1.IsFinished">
+            <summary>処理が終了済であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture`1.IsCanceled">
+            <summary>処理がキャンセル済みであるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture`1.HasError">
+            <summary>処理がエラー終了したかどうかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFuture`1.ErrorMessage">
+            <summary>エラーがある場合、それを文字列として取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.Wait(System.Int32)">
+            <summary>指定した時間まで待機します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.Wait">
+            <summary>無期限に待機します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.CheckHasError(System.Int32)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.CheckHasError">
+            <summary>エラーが起きたかどうかを無期限待機ののち確認します。</summary>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.CheckHasValue(System.Int32)">
+            <summary>値を持っているかどうかを待機ののち確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.CheckHasValue">
+            <summary>値を持っているかどうかを無期限待機ののち確認します。</summary>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.Cancel">
+            <summary>結果取得をキャンセルします。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.AddCallback(System.Action)">
+            <summary>処理完了時に呼ばれるコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.AddCallback(System.Action{`0})">
+            <summary>処理完了時に呼ばれるコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFuture`1.Get">
+            <summary>結果の値を取得します。</summary>
+            <returns>非同期呼び出しで得られる想定の型のデータ</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiFutureExtensions">
+            <summary><see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>に拡張機能を提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFutureExtensions.WillReturns``1(Baku.LibqiDotNet.Libqi.QiFuture)">
+            <summary>
+            <see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>型で生成した非同期呼び出しが実際には<typeparamref name="T"/>型の
+            戻り値を返すことを宣言し、戻り値のある非同期呼び出しとして扱えるようにします。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="future"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMethodSignature">
+            <summary>
+            <see cref="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.AdvertiseMethod(System.String,Baku.LibqiDotNet.Libqi.QiMethodSignature,System.Collections.Generic.IEnumerable{Baku.LibqiDotNet.Libqi.QiMethodSignature},Baku.LibqiDotNet.Libqi.QiObjectMethod)"/>
+            関数で用いるための、変数の型情報を表します。
+            </summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodSignature.Signature">
+            <summary>型情報と等価な文字列を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMethodSignature.Create(Baku.LibqiDotNet.Libqi.QiMethodSignatureKind)">
+            <summary>型を指定し、対応する型を保持するシグネチャを取得します。</summary>
+            <param name="signature">型の種類</param>
+            <returns>型に対応したシグネチャ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMethodSignature.ListOf(Baku.LibqiDotNet.Libqi.QiMethodSignature)">
+            <summary>指定した型からなるリスト型のシグネチャを取得します。</summary>
+            <param name="sig">リストの要素型</param>
+            <returns>リストのシグネチャ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMethodSignature.TupleOf(System.Collections.Generic.IEnumerable{Baku.LibqiDotNet.Libqi.QiMethodSignature})">
+            <summary>指定した型を順に内包するタプル型のシグネチャを取得します。</summary>
+            <param name="sigs">タプルに含む型の一覧</param>
+            <returns>タプル型のシグネチャ</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind">
+            <summary>自作関数を作る場合に関数を指定するためのシグネチャ一覧です。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Void">
+            <summary>関数に戻り値が無いことを示す型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Bool">
+            <summary>論理値型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Int8">
+            <summary>符号あり1バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.UInt8">
+            <summary>符号なし1バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Int16">
+            <summary>符号あり2バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.UInt16">
+            <summary>符号なし2バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Int32">
+            <summary>符号あり4バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.UInt32">
+            <summary>符号なし4バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Int64">
+            <summary>符号あり8バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.UInt64">
+            <summary>符号なし8バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Float">
+            <summary>4バイト小数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Double">
+            <summary>8バイト小数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.String">
+            <summary>文字列型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Dynamic">
+            <summary>動的型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiMethodSignatureKind.Raw">
+            <summary>バイナリ型</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMethod">
+            <summary>Qi Frameworkのモジュール上に登録された関数を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethod.Name">
+            <summary>メソッド名を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMethod.CallAsync(System.Object[])">
+            <summary>関数を非同期で呼び出します。</summary>
+            <param name="args">関数の引数</param>
+            <returns>非同期呼び出しの結果取得予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMethod.CallAsync``1(System.Object[])">
+            <summary>関数を非同期で呼び出します。</summary>
+            <param name="args">関数の引数</param>
+            <returns>非同期呼び出しの結果取得予約</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethod.Overloads">
+            <summary>関数のオーバーロード情報を取得します。オーバーロードされていない場合、1つの要素のみを含みます</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMethodArgumentInfo">
+            <summary>Qiの関数引数に関する情報を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodArgumentInfo.Name">
+            <summary>引数の名前を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodArgumentInfo.Description">
+            <summary>引数の意味について要約文を取得します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMethodInfo">
+            <summary>メソッドの名称以外の補助情報を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.UID">
+            <summary>メソッドに割り当てられたIDを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.Name">
+            <summary>メソッド名を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.ReturnValueSignature">
+            <summary>戻り値の型に対応するシグネチャ文字列を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.ArgumentSignature">
+            <summary>引数の型に対応するシグネチャ文字列を取得します。引数はタプルで一括りになっています。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.Description">
+            <summary>メソッドの役割についての要約文を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.ReturnValueDescription">
+            <summary>戻り値の意味についての要約文を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethodInfo.ArgumentsInfo">
+            <summary>引数のインフォメーション一覧(ロジック的には割とどうでもいい)</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMethods">
+            <summary>Qi Frameworkのモジュールに定義された関数の一覧を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMethods.Item(System.String)">
+            <summary>名前を指定してメソッド名を取得します。</summary>
+            <param name="methodName">メソッドの名前</param>
+            <returns>対応するメソッド。不正な名前を指定した場合は例外が送出されます。</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"/>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiObject">
+            <summary>Qiのオブジェクト(基本的にサービスモジュールと同じ)を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiObject.Name">
+            <summary>[NOT SUPPORTED]実装された場合はサービス名を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiObject.Description">
+            <summary>サービスの説明文を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiObject.Item(System.String)">
+            <summary>メソッド名を指定して対応するメソッドを取得します。</summary>
+            <param name="methodName">メソッド名</param>
+            <returns>名称を指定されたメソッド</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.GetProperty``1(System.String)">
+            <summary>(動作未確認)オブジェクトのプロパティ値を取得します。</summary>
+            <param name="pname">取得対象となるプロパティの名前</param>
+            <returns>対応するプロパティ値への予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.SetProperty(System.String,System.Object)">
+            <summary>(動作未確認)オブジェクトのプロパティに値を設定します。</summary>
+            <param name="pname">プロパティ名</param>
+            <param name="v">プロパティへ代入する値</param>
+            <returns>代入結果への予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>シグナル受信時の処理を登録します。</summary>
+            <param name="handler">受信時に呼ばれるハンドラ関数</param>
+            <returns>登録の非同期処理状態</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.DisconnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>シグナル受信時の処理を登録解除します。</summary>
+            <param name="handler"><see cref="M:Baku.LibqiDotNet.Libqi.QiObject.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})"/>で登録したハンドラ関数</param>
+            <returns>登録解除の非同期処理状態</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.GetMetaObject">
+            <summary>サービスの内部情報を表すメタオブジェクトを取得します。</summary>
+            <returns>
+            サービスの内部情報を表すメタオブジェクト。
+            含まれる内部情報を見たい場合は<see cref="M:Baku.LibqiDotNet.Libqi.QiValue.Dump(System.Int32,System.Int32)"/>を用いて確認して下さい。
+            </returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.CallDirect(System.String,Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>
+            自力でシグネチャを正しく定義してタプルを渡し、関数を呼び出します。
+            ラッパーの動作不良に備えて公開されており、通常は<see cref="P:Baku.LibqiDotNet.Libqi.QiObject.Item(System.String)"/>で選択したメソッドを用いてください。
+            </summary>
+            <param name="signature">関数名と引数タプルの合わさった文字列("ping::()"など)</param>
+            <param name="argsTuple">引数の入ってるタプル</param>
+            <returns>戻り値の非同期取得に使えるfuture型</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.ConnectSignal(System.String,System.Action{Baku.LibqiDotNet.Libqi.QiValue})">
+            <summary>シグナル(イベント)にハンドラを登録します。</summary>
+            <param name="signature">シグナルの名前("signal"など)</param>
+            <param name="callback">そのシグナルに対するコールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObject.UnregisterSignalAsync">
+            <summary>識別IDを指定してシグナルの登録を解除します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiObject.QiSignalHandler">
+            <summary>マネージドハンドラとアンマネージドハンドラを両方持っておくためのホルダー</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiObject.QiSignalHandler.TargetAction">
+            <summary>ユーザが指定したイベントハンドラ</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiObject.QiSignalHandler.ApiCallback">
+            <summary><see cref="P:Baku.LibqiDotNet.Libqi.QiObject.QiSignalHandler.TargetAction"/>をAPIに通す形に変形して得たハンドラ</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiObjectBuilder">
+            <summary>
+            <see cref="T:Baku.LibqiDotNet.Libqi.QiObject"/>のビルダークラスです。
+            自作サービスを作る場合のみ使われるものであるため、実装は最低限です。
+            </summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.AdvertiseMethod(System.String,Baku.LibqiDotNet.Libqi.QiObjectMethod)">
+            <summary>関数を登録します。</summary>
+            <param name="signature">関数のフルシグネチャ</param>
+            <param name="method">実際の関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.AdvertiseMethod(System.String,Baku.LibqiDotNet.Libqi.QiMethodSignature,System.Collections.Generic.IEnumerable{Baku.LibqiDotNet.Libqi.QiMethodSignature},Baku.LibqiDotNet.Libqi.QiObjectMethod)">
+            <summary>関数を登録します。</summary>
+            <param name="methodName">関数の名前</param>
+            <param name="returns">返却する値の型</param>
+            <param name="args">引数の型一覧</param>
+            <param name="method">メソッドの実装</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.AdvertiseSignal(System.String,System.String)">
+            <summary>シグナルを登録します。</summary>
+            <param name="name">シグナル名</param>
+            <param name="signature">シグネチャ</param>
+            <returns>シグナルに割り振ったID</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.AdvertiseProperty(System.String,System.String)">
+            <summary>
+            プロパティを登録します。
+            </summary>
+            <param name="name">プロパティ名</param>
+            <param name="signature">プロパティのシグネチャ</param>
+            <returns>プロパティに割り振ったID</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.BuildObject">
+            <summary>
+            登録情報に基づき、オブジェクトを生成します。
+            </summary>
+            <returns>生成されたオブジェクト</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiObjectBuilder.Create">
+            <summary>
+            既定の方法でインスタンスを生成します。
+            </summary>
+            <returns>生成されたインスタンス</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiObjectBuilder.QiMethod">
+            <summary>マネージドに宣言されたメソッドとアンマネージド版をセットで保持するホルダー</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiObjectMethod">
+            <summary>
+            サービスに登録される関数を表します。
+            </summary>
+            <param name="completeSignature">関数の引数名と完全なシグネチャ</param>
+            <param name="args">引数</param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiPromise">
+            <summary>
+            <see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>の対となる値の返却処理を表します(多分)。
+            サービスの自作をしない限り必要なさそうなため実装は最低限になっています。
+            </summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiPromise.SetValue(Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>
+            値を設定します。
+            </summary>
+            <param name="value">設定する値</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiPromise.SetError(System.String)">
+            <summary>
+            エラーが起きたことを設定します。
+            </summary>
+            <param name="error">エラーの内容の要約文</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiPromise.SetCanceled">
+            <summary>処理がキャンセルされたことを通知します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiPromise.GetFuture">
+            <summary>
+            処理に対応した<see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>を発行します。
+            </summary>
+            <returns>処理に対応する結果への予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiPromise.Create(System.Boolean)">
+            <summary>
+            インスタンスを生成します。
+            </summary>
+            <param name="asyncCallback">非同期コールバックの設定(詳細未確認)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiPromise.Create(System.Boolean,Baku.LibqiDotNet.Libqi.QiFutureCancel,System.IntPtr)">
+            <summary>
+            (未確認)キャンセル時のコールバックを設定してインスタンスを生成します。
+            </summary>
+            <param name="asyncCallback"></param>
+            <param name="cb"></param>
+            <param name="userdata"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiFutureCancel">
+            <summary>
+            <see cref="M:Baku.LibqiDotNet.Libqi.QiPromise.Create(System.Boolean,Baku.LibqiDotNet.Libqi.QiFutureCancel,System.IntPtr)"/>によって
+            キャンセル処理が生じた場合に用いるコールバック関数を表します。
+            </summary>
+            <param name="promise">対象となる<see cref="T:Baku.LibqiDotNet.Libqi.QiPromise"/></param>
+            <param name="userdata">ユーザデータ(通常は使用しない)</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiSession">
+            <summary>通信セッションを表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiSession.IsConnected">
+            <summary>セッションが接続済みであるかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.Create">
+            <summary>非接続状態のセッションを新たに生成します。</summary>
+            <returns>新規生成されたセッション</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.Create(System.String)">
+            <summary>接続先アドレスを指定し、接続が完了した状態のセッションを取得します。</summary>
+            <param name="address">接続先のアドレス</param>
+            <returns>接続済みのセッション</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.ConnectAsync(System.String)">
+            <summary>指定したアドレスへの接続を試みます。</summary>
+            <param name="address">接続先アドレス</param>
+            <returns>接続結果への取得予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.GetServicesAsync">
+            <summary>サービス名の一覧を取得します。</summary>
+            <returns>サービス一覧</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.GetServices">
+            <summary>サービス一覧を文字列の配列として取得します。</summary>
+            <returns>サービスの一覧</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.GetServiceAsync(System.String)">
+            <summary>サービス名を指定してサービスを取得します。</summary>
+            <param name="name">サービス名</param>
+            <returns>サービス名に対応した<see cref="T:Baku.LibqiDotNet.IQiObject"/>の取得予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.Close">
+            <summary>セッションを閉じます。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.CloseAsync">
+            <summary>セッションを閉じます。</summary>
+            <returns>未確認</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiSession.IsServiceRegistrationSupported">
+            <summary>サービス登録/登録解除がサポートされているかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.GetUrl">
+            <summary>
+            (動作未確認)セッションに対応したURLを取得します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.SetIdentity(System.String,System.String)">
+            <summary>
+            (動作未確認)セッションの一意識別子を設定します。
+            </summary>
+            <param name="key"></param>
+            <param name="crt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.ListenAsync(System.String,System.Boolean)">
+            <summary>セッションをリスンします。</summary>
+            <param name="address">リスン先アドレスです。例えばアクセスを制限しない場合は"tcp://0.0.0.0:0"を指定します。</param>
+            <param name="standAlone">アプリケーションがスタンドアロンである場合はtrueにします。通常は設定する必要はありません。</param>
+            <returns>リスン結果への予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.RegisterServiceAsync(System.String,Baku.LibqiDotNet.IQiObject)">
+            <summary>サービスに名前を付けて登録します。</summary>
+            <param name="name">サービス名</param>
+            <param name="obj">サービスの実体</param>
+            <returns>未確認(たぶんサービスのID)</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.UnregisterServiceAsync(System.UInt32)">
+            <summary>
+            IDを指定してサービスを登録解除します。
+            </summary>
+            <param name="idx">解除の対象となるサービスのID</param>
+            <returns>未確認</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSession.GetEndpoints">
+            <summary>セッションのエンドポイントを取得します。</summary>
+            <returns>エンドポイント情報</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiSignatures">
+            <summary>Qiの値型を表す文字列の一覧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeNone">
+            <summary>None型(通常は使用されないはず)</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeVoid">
+            <summary>関数に戻り値が無いことを示す型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeBool">
+            <summary>論理値型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeInt8">
+            <summary>符号あり1バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeUInt8">
+            <summary>符号なし1バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeInt16">
+            <summary>符号あり2バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeUInt16">
+            <summary>符号なし2バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeInt32">
+            <summary>符号あり4バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeUInt32">
+            <summary>符号なし4バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeInt64">
+            <summary>符号あり8バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeUInt64">
+            <summary>符号なし8バイト整数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeFloat">
+            <summary>4バイト小数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeDouble">
+            <summary>8バイト小数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeString">
+            <summary>文字列型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeListBegin">
+            <summary>配列型の開き括弧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeListEnd">
+            <summary>配列型の閉じ括弧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeMapBegin">
+            <summary>マップ型の開き括弧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeMapEnd">
+            <summary>マップ型の閉じ括弧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeTupleBegin">
+            <summary>タプル型の開き括弧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeTupleEnd">
+            <summary>タプル型の閉じ括弧</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeDynamic">
+            <summary>動的型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeRaw">
+            <summary>バイナリ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypePointer">
+            <summary>ポインタ型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeObject">
+            <summary>オブジェクト型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeVarArgs">
+            <summary>可変長引数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeKwArgs">
+            <summary>可変長マップ引数型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeUnknown">
+            <summary>未知の型(エラーを表す場合もある)</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.MethodNameSuffix">
+            <summary>メソッド名と引数、戻り値シグネチャを区切る文字列</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeNameNotationBegin">
+            <summary>シグネチャ内でマップ型やタプル型の要素のエイリアス的な呼称を記述する際の開始文字</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeNameNotationEnd">
+            <summary>シグネチャ内でマップ型やタプル型の要素のエイリアス的な呼称を記述する際の終了文字</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiSignatureValidityChecker">
+            <summary>関数のシグネチャの有効性を検証するための処理を提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSignatureValidityChecker.CheckValidity(System.String,Baku.LibqiDotNet.Libqi.QiInputValue[])">
+            <summary>
+            メソッドの引数リストと実際に渡す予定の引数を比較し、妥当な対応が取れているかを確認します。
+            </summary>
+            <param name="signature">ターゲットのシグネチャ(全体を囲うタプルの丸括弧を含む)</param>
+            <param name="args">実際の引数のシグネチャ</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSignatureValidityChecker.SplitTupleSignatures(System.String)">
+            <summary>タプルのシグネチャを要素別に分解します。</summary>
+            <param name="signatures">タプルのシグネチャ(例: "(ib[s])"</param>
+            <returns>分解された要素別のシグネチャ(例:入力が"(ib[s])"なら{ "i", "b", "[s]" })</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiSignatureValidityChecker.SplitTupleSignatures(System.String,System.Boolean)">
+            <summary>タプルのシグネチャを要素別に分解します。</summary>
+            <param name="signatures">タプルのシグネチャ(例: "(ib[s])"</param>
+            <param name="ignoreError">パースに失敗したシグネチャを自動で<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>とみなすかどうかを設定します。</param>
+            <returns>分解された要素別のシグネチャ(例:入力が"(ib[s])"なら{ "i", "b", "[s]" })</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiType">
+            <summary><see cref="T:Baku.LibqiDotNet.Libqi.QiValue"/>のインスタンスに対応する型情報を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiType.TypeKind">
+            <summary>型の種類を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiType.GetMapKeyType">
+            <summary>型が連想配列の場合、キーの型を取得します。</summary>
+            <returns>キーの型</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiType.GetMapValueType">
+            <summary>型が連想配列の場合、値の型を取得します。</summary>
+            <returns>値の型</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiType.GetTupleCount">
+            <summary>型がタプルの場合、タプルの要素数を取得します。</summary>
+            <returns>タプルの要素数</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiType.GetTupleTypeAt(System.Int32)">
+            <summary>型がタプルの場合、タプルの指定した位置の値の型を取得します。</summary>
+            <param name="index">指定するインデクス</param>
+            <returns>指定された位置での値の型</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiType.GetTupleTypes">
+            <summary>型がタプルの場合、タプルの各要素の型をまとめたものを取得します。</summary>
+            <returns>タプルの各要素の型</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiValue">
+            <summary>Qiの一般的な値を表します。この値はAPIの入出力いずれにも使われます。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.ValueKind">
+            <summary>値の種類を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.ContentValueKind">
+            <summary>値の種類を取得しますが、動的型については中身の型の種類を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetSignature(System.Boolean)">
+            <summary>値のシグネチャを取得します。</summary>
+            <param name="resolveDynamics">シグネチャの解決法フラグ(サンプル見た限り既定値以外を使うように見えない)</param>
+            <returns>値のシグネチャ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetContentSignature(System.Boolean)">
+            <summary>値のシグネチャを取得しますが、動的型の場合中身のシグネチャを取得します。</summary>
+            <param name="resolveDynamics">シグネチャの解決法フラグ(サンプル見た限り既定値以外を使うように見えない)</param>
+            <returns>値のシグネチャ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.Reset(System.String)">
+            <summary>
+            (動作未確認)値を規定値に戻します。
+            </summary>
+            <param name="signature"></param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetQiType">
+            <summary>
+            型情報を取得します。
+            </summary>
+            <returns>インスタンスに対応する型情報</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetContentQiType">
+            <summary>型情報を取得しますが、動的型の場合中身の型情報を取得します。</summary>
+            <returns>インスタンスに対応する型情報</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.Copy">
+            <summary>
+            値をコピーします。
+            </summary>
+            <returns>コピーされた値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.Create(System.String)">
+            <summary>
+            シグネチャを指定して値を初期化します。
+            </summary>
+            <param name="sig">値のシグネチャを表す文字列</param>
+            <returns>初期化された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetCopy(Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>
+            値のコピーを生成します。
+            </summary>
+            <param name="src">生成元の値</param>
+            <returns>コピーされた値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.Swap(Baku.LibqiDotNet.Libqi.QiValue,Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>
+            指定した2つの値を入れ替えます。
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.Value">
+            <summary>格納されている値を取得します。コンテナ型の場合自分自身のインスタンスを返します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToBool">
+            <summary>格納されているはずのbool値を取得します。</summary>
+            <returns>格納されたbool値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToSByte">
+            <summary>この変数が符号あり1バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToInt16">
+            <summary>この変数が符号あり2バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToInt32">
+            <summary>この変数が符号あり4バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToInt64">
+            <summary>この変数が符号あり8バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToByte">
+            <summary>この変数が符号なし1バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToUInt16">
+            <summary>この変数が符号なし2バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToUInt32">
+            <summary>この変数が符号なし4バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToUInt64">
+            <summary>この変数が符号なし8バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToFloat">
+            <summary>この変数が単精度小数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToDouble">
+            <summary>この変数が倍精度小数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToBytes">
+            <summary>この変数がバイナリデータ型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToString">
+            <summary>この変数が文字列型である場合はその値、そうでない場合は保持している値の型を表す文字列を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.ToQiString">
+            <summary>データが文字列であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetObject">
+            <summary>この変数がオブジェクト型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetDynamic">
+            <summary>この変数がダイナミック型であると想定し、内側に格納している値を取り出します。</summary>
+            <returns>動的型の中に格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(System.Int64)">
+            <summary>この変数が符号あり整数型であると想定し、値を設定します。</summary>
+            <param name="v">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(System.UInt64)">
+            <summary>この変数が符号なし整数型であると想定し、値を設定します。</summary>
+            <param name="v">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(System.Single)">
+            <summary>この変数が単精度小数型であると想定し、値を設定します。</summary>
+            <param name="v">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(System.Double)">
+            <summary>この変数が倍精度小数型であると想定し、値を設定します。</summary>
+            <param name="v">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(System.String)">
+            <summary>この変数が文字列型であると想定し、値を設定します。</summary>
+            <param name="v">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>この変数が動的型であると想定し、値を設定します。</summary>
+            <param name="v">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(Baku.LibqiDotNet.Libqi.QiObject)">
+            <summary>この変数がオブジェクト型であると想定し、値を設定します。</summary>
+            <param name="obj">設定する値</param>
+            <returns>設定に成功した場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.SetValue(System.Byte[])">
+            <summary>Rawデータ型の変数にバイナリを設定します。</summary>
+            <param name="data">設定するバイナリデータ</param>
+            <returns>設定に成功したかどうか</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.Count">
+            <summary>リスト、連想配列、タプルの要素数を取得します。それ以外の値の場合0を返します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.AddElement(Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>
+            リストに要素を追加します。
+            </summary>
+            <param name="value">追加する値</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetKeys">
+            <summary>
+            連想配列のキー一覧を取得します。
+            </summary>
+            <returns>キー一覧</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.Item(System.Int32)">
+            <summary>リストまたはタプルにインデクスでアクセスします。SEGVリスクがあるため境界チェックを行います。</summary>
+            <param name="index">取得したい要素のインデックス</param>
+            <returns>指定した要素</returns>
+            <exception cref="T:System.InvalidOperationException"/>
+            <exception cref="T:System.IndexOutOfRangeException"/> 
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.Item(Baku.LibqiDotNet.IQiResult)">
+            <summary>
+            連想配列にキー要素でアクセスします。キーが連想配列に含まれるかどうかはチェックされません。
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.Keys">
+            <summary>保持しているデータが連想配列である場合、キー/値ペアのうちキーの一覧を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.MapItems">
+            <summary>保持しているデータが連想配列である場合、キー/値ペアの一覧を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.NonDynamicValue">
+            <summary>ダイナミック型を再帰的にアンパックし、ダイナミック型でない実際の内容を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.Dump">
+            <summary>データの内部構造を文字列として取得します。</summary>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.Dump(System.Int32,System.Int32)">
+            <summary>文字列データとしてオブジェクトの階層構造を出力します。</summary>
+            <returns>文字列でダンプされた出力</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiValue.Void">
+            <summary>Qi Frameworkへ登録する関数についての、戻り値が無いことを示す値を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetValue(System.Int64)">
+            <summary>この変数が符号あり整数型であると想定し、失敗時のデフォルト値を指定して値を取得します。</summary>
+            <param name="defaultValue">取得に失敗した場合返される値</param>
+            <returns>成功した場合は実際の値、失敗した場合は指定したデフォルト値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiValue.GetValue(System.UInt64)">
+            <summary>この変数が符号なし整数型であると想定し、失敗時のデフォルト値を指定して値を取得します。</summary>
+            <param name="defaultValue">取得に失敗した場合返される値</param>
+            <returns>成功した場合は実際の値、失敗した場合は指定したデフォルト値</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.DllImportSettings">
+            <summary>アンマネージドライブラリの読み込み設定です。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.Libqi.DllImportSettings.DllName">
+            <summary>ライブラリが読み込む予定のアンマネージドDLLファイルの名前</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiApplication">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiApplication"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiFuture">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiFuture"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiObject">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiObject"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiObjectBuilder">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiObjectBuilder"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiPromise">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiPromise"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiSession">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiSession"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiType">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiType"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiApi.QiApiValue">
+            <summary>アンマネージドAPIのうち<see cref="T:Baku.LibqiDotNet.Libqi.QiValue"/>に関するもの</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.TaskUtil">
+            <summary>forgettableな非同期処理機能</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiByteData">
+            <summary>バイナリデータを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiByteData.#ctor(System.Byte[])">
+            <summary>格納する値を指定してインスタンスを初期化します。</summary>
+            <param name="data">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiByteData.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiByteData.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiByteData.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiByteData.Value">
+            <summary>格納しているデータを取得、設定します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiDynamic">
+            <summary>動的に型付けが行われる値を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiDynamic.#ctor(Baku.LibqiDotNet.Libqi.QiValue)">
+            <summary>
+            渡された<see cref="F:Baku.LibqiDotNet.Libqi.QiSignatures.TypeDynamic"/>シグネチャを持った変数をそのまま格納するか、
+            そうでない場合渡された値を動的型コンテナに格納してインスタンスを初期化します。
+            </summary>
+            <param name="value">インスタンスが保持する値</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiDynamic.#ctor(Baku.LibqiDotNet.Libqi.QiInputValue)">
+            <summary>
+            生成済みの他の値を用いてインスタンスを初期化します。
+            </summary>
+            <param name="v">生成された値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiDynamic.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiDynamic.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiDynamic.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiDynamic.Value">
+            <summary>格納しているデータを取得します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiDynamicExtension">
+            <summary><see cref="T:Baku.LibqiDotNet.Libqi.QiDynamic"/>のためのヘルパー拡張メソッドを定義します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiDynamicExtension.ToDynamic(Baku.LibqiDotNet.Libqi.QiInputValue)">
+            <summary>
+            <see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型変数を動的型にキャストします。
+            </summary>
+            <param name="v">何かしらの値</param>
+            <returns>指定した値を動的型コンテナに格納した値</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiFloat">
+            <summary>4バイトデータからなる単精度浮動小数点数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFloat.#ctor(System.Single)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFloat.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiFloat.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFloat.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiFloat.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiFloat.op_Implicit(System.Single)~Baku.LibqiDotNet.Libqi.QiFloat">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiDouble">
+            <summary>8バイトデータからなる倍精度浮動小数点数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiDouble.#ctor(System.Double)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiDouble.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiDouble.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiDouble.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiDouble.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiDouble.op_Implicit(System.Double)~Baku.LibqiDotNet.Libqi.QiDouble">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiInFactory">
+            <summary>一般的なデータをLibqiの関数に渡す変換処理を提供します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInFactory.RecurseParseDepthLimit">
+            <summary>引数の辞書、IE、クラスのプロパティの深さ上限を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.Create(System.Object)">
+            <summary>与えられたデータに基づいてメソッドへ渡せるデータを生成します。</summary>
+            <param name="value">Libqiの関数へ渡すデータ</param>
+            <returns>Libqi関数へ受け渡し可能な形式に変換されたデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.CreateSub(System.Object,System.Int32)">
+            <summary>一般の値(組み込み型/IDic/IE/一般クラス)を入力値へ変換するが、再帰深度を使い果たした場合はそこで例外停止する</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.IsEmbeddedType(System.Type)">
+            <summary>指定された値が組み込み型かどうか判定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.GetIEnumerableEmbeddedArgType(System.Type)">
+            <summary>指定された型が組み込み型の<see cref="T:System.Collections.Generic.IEnumerable`1"/>である場合IEnumerableの中身の型、そうでない場合nullを返します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.GetIEnumerableArgType(System.Type)">
+            <summary>指定された型が<see cref="T:System.Collections.Generic.IEnumerable`1"/>である場合IEnumerableの中身の型、そうでない場合nullを返します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.GetEmbeddedTypeValue(System.Object,Baku.LibqiDotNet.LibqiTypeCode)">
+            <summary>組み込み型の値を対応する<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>派生型に変換します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInFactory.GetIEnumerableEmbedded(System.Object,Baku.LibqiDotNet.LibqiTypeCode)">
+            <summary>IEnumerable&lt;(組み込み型)&gt;の形式をした値を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiList`1"/>に変換します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>Qiの値型の基底</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInputValue.QiValue">
+            <summary>実際の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInputValue.Signature">
+            <summary>値の種類を表すシグネチャを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.Dump">
+            <summary>値の情報をデバッグ用文字列として取得します。</summary>
+            <returns>値をあらわすデバッグ用の文字列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Boolean)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>論理値を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の論理値</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Byte)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号なし1バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号なし1バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.UInt16)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号なし2バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号なし2バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.UInt32)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号なし4バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号なし4バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.UInt64)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号なし8バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号なし8バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.SByte)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号あり1バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号あり1バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Int16)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号あり2バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号あり2バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Int32)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号あり4バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号あり4バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Int64)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>符号あり8バイト整数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の符号あり8バイト整数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Single)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>単精度小数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の小数値</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Double)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>倍精度小数を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の小数値</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.String)~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>文字列を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の文字列</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Byte[])~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>バイト配列を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元のバイト配列</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Int32[])~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>整数の配列を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の整数配列</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.Double[])~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>小数の配列を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の小数配列</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInputValue.op_Implicit(System.String[])~Baku.LibqiDotNet.Libqi.QiInputValue">
+            <summary>文字列の配列を適切な<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>の派生型インスタンスに変換します。</summary>
+            <param name="x">入力元の文字列配列</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiBool">
+            <summary>ブール型を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiBool.#ctor(System.Boolean)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiBool.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiBool.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiBool.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiBool.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiBool.op_Implicit(System.Boolean)~Baku.LibqiDotNet.Libqi.QiBool">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiInt8">
+            <summary>符号あり1バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt8.#ctor(System.SByte)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt8.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiInt8.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt8.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt8.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt8.op_Implicit(System.SByte)~Baku.LibqiDotNet.Libqi.QiInt8">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiInt16">
+            <summary>符号あり2バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt16.#ctor(System.Int16)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt16.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiInt16.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt16.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt16.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt16.op_Implicit(System.Int16)~Baku.LibqiDotNet.Libqi.QiInt16">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiInt32">
+            <summary>符号あり4バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt32.#ctor(System.Int32)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt32.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiInt32.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt32.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt32.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt32.op_Implicit(System.Int32)~Baku.LibqiDotNet.Libqi.QiInt32">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiInt64">
+            <summary>符号あり8バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt64.#ctor(System.Int64)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt64.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiInt64.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt64.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiInt64.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiInt64.op_Implicit(System.Int64)~Baku.LibqiDotNet.Libqi.QiInt64">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiUInt8">
+            <summary>符号なし1バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt8.#ctor(System.Byte)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt8.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiUInt8.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt8.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt8.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt8.op_Implicit(System.Byte)~Baku.LibqiDotNet.Libqi.QiUInt8">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiUInt16">
+            <summary>符号なし2バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt16.#ctor(System.UInt16)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt16.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiUInt16.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt16.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt16.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt16.op_Implicit(System.UInt16)~Baku.LibqiDotNet.Libqi.QiUInt16">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiUInt32">
+            <summary>符号なし4バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt32.#ctor(System.UInt32)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt32.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiUInt32.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt32.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt32.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt32.op_Implicit(System.UInt32)~Baku.LibqiDotNet.Libqi.QiUInt32">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiUInt64">
+            <summary>符号なし8バイト整数を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt64.#ctor(System.UInt64)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt64.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiUInt64.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt64.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiUInt64.Value">
+            <summary>格納される値を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiUInt64.op_Implicit(System.UInt64)~Baku.LibqiDotNet.Libqi.QiUInt64">
+            <summary>指定したデータを保持するQi Frameworkの値を生成します。</summary>
+            <param name="v">保持させるデータ</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiList`1">
+            <summary>可変な配列型を表します。配列は単調に伸びる処理だけが許可されています。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiList`1.Count">
+            <summary>要素数を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiList`1.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiList`1.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiList`1.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiList`1.Values">
+            <summary>インスタンスの生成時に用いたデータを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList`1.Create(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            列挙された<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>派生型から、それに対応したリストを生成します。
+            </summary>
+            <param name="values">何かしらの値の列挙</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList`1.CreateDynamic(System.Collections.Generic.IEnumerable{Baku.LibqiDotNet.Libqi.QiInputValue})">
+            <summary>
+            列挙された<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>派生型を要素として含む、動的型の内容からなるリストを生成します。
+            </summary>
+            <param name="values">何かしらの値の列挙</param>
+            <returns>指定した値を保持する動的型のリスト</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiList">
+            <summary><see cref="T:Baku.LibqiDotNet.Libqi.QiList`1"/>のファクトリメソッドを定義します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            列挙された<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>派生型から、それに対応したリストを生成します。
+            </summary>
+            <param name="values">何かしらの値の列挙</param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.CreateDynamic(System.Collections.Generic.IEnumerable{Baku.LibqiDotNet.Libqi.QiInputValue})">
+            <summary>
+            列挙された<see cref="T:Baku.LibqiDotNet.Libqi.QiInputValue"/>派生型を要素として含む、動的型の内容からなるリストを生成します。
+            </summary>
+            <param name="values">何かしらの値の列挙</param>
+            <returns>指定した値を保持する動的型のリスト</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Boolean})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.UInt16})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.UInt32})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.UInt64})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.SByte})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Int16})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Int64})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Single})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.Double})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiList.Create(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>値の一覧からQi Frameworkで利用可能な配列を生成します。</summary>
+            <param name="values">入力値の一覧</param>
+            <returns>入力と等価な配列</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiListExtension">
+            <summary><see cref="T:Baku.LibqiDotNet.Libqi.QiList`1"/>の拡張メソッドを定義します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiListExtension.ToQiList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            IEnumerableを対応する<see cref="T:Baku.LibqiDotNet.Libqi.QiList"/>に変換します。
+            </summary>
+            <typeparam name="T">要素の型</typeparam>
+            <param name="values">実際の要素の列挙</param>
+            <returns>指定したデータを保持する配列</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiListExtension.ToQiDynamicList``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            動的型(<see cref="T:Baku.LibqiDotNet.Libqi.QiDynamic"/>)でパックした配列への変換を行います。
+            </summary>
+            <param name="values">何かしらの値の列挙</param>
+            <returns>指定した値を保持する動的型のリスト</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMap`2">
+            <summary>連想配列(辞書)型を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMap`2.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiMap`2.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiMap`2.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMap`2.Create(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>キーと値のペアを用いてマップ型変数を生成します。</summary>
+            <param name="values">キーと値のペア</param>
+            <returns>入力データに対応するマップ型変数</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiMap">
+            <summary>ジェネリック型である<see cref="T:Baku.LibqiDotNet.Libqi.QiMap`2"/>のインスタンスを生成するファクトリメソッドを提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMap.ToQiMap``2(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{``0,``1}})">
+            <summary>指定されたキー、値ペアの一覧を用いて辞書型データを生成します。</summary>
+            <typeparam name="K">キーの型</typeparam>
+            <typeparam name="V">値の型</typeparam>
+            <param name="items">データの内容となる値の一覧</param>
+            <returns>指定したデータを保持する辞書型データ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMap.Create``2(System.Collections.Generic.KeyValuePair{``0,``1}[])">
+            <summary>指定されたキー、値ペアの一覧を用いて辞書型データを生成します。</summary>
+            <typeparam name="K">キーの型</typeparam>
+            <typeparam name="V">値の型</typeparam>
+            <param name="items">データの内容となる値の一覧</param>
+            <returns>指定したデータを保持する辞書型データ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiMap.Create``2(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1})">
+            <summary>キーと値の一覧を与えて辞書型データを作成します。</summary>
+            <typeparam name="K">キーのデータ型</typeparam>
+            <typeparam name="V">値のデータ型</typeparam>
+            <param name="keys">キーの一覧</param>
+            <param name="values">値の一覧</param>
+            <returns>キーと値を順にペアにした辞書型データ</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiString">
+            <summary>文字列型を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiString.#ctor(System.String)">
+            <summary>
+            格納する値を指定してインスタンスを初期化します。
+            </summary>
+            <param name="value">格納する値</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiString.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiString.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiString.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiString.Value">
+            <summary>格納したデータを取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiString.op_Implicit(System.String)~Baku.LibqiDotNet.Libqi.QiString">
+            <summary>指定した文字列を、その文字列を保持する<see cref="T:Baku.LibqiDotNet.Libqi.QiString"/>に変換します。</summary>
+            <param name="v">実際のデータとなる文字列</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Libqi.QiTuple">
+            <summary>複数の要素を一括りにして扱うタプル型を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiTuple.QiValue">
+            <summary>ラップしている<see cref="P:Baku.LibqiDotNet.Libqi.QiTuple.QiValue"/>型の値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiTuple.Signature">
+            <summary>変数型に対応したシグネチャを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Libqi.QiTuple.Count">
+            <summary>要素の個数を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiTuple.Create(Baku.LibqiDotNet.Libqi.QiInputValue[])">
+            <summary>内容として用いる値を指定してタプルを生成します。</summary>
+            <param name="values">タプルに含む値</param>
+            <returns>指定した値を順に格納したタプル</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Libqi.QiTuple.CreateDynamic(Baku.LibqiDotNet.Libqi.QiInputValue[])">
+            <summary>
+            全ての要素が<see cref="T:Baku.LibqiDotNet.Libqi.QiDynamic"/>であるようなタプルを生成します。
+            このようなタプルは<see cref="M:Baku.LibqiDotNet.Libqi.QiMethod.CallAsync(System.Object[])"/>の引数として渡す処理に適しています。
+            </summary>
+            <param name="values">タプルの要素</param>
+            <returns>生成されたタプル</returns>
+        </member>
+    </members>
+</doc>

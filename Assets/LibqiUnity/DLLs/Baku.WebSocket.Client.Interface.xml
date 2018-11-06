@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baku.WebSocket.Client.Interface</name>
+    </assembly>
+    <members>
+        <member name="T:Baku.Websocket.Client.IWebSocket">
+            <summary>
+            WebSocketクライアントに必要な処理を定義します。
+            この定義はNuGetで公開されているパッケージであるWebSocket4Netに準じています。
+            </summary>
+        </member>
+        <member name="P:Baku.Websocket.Client.IWebSocket.AllowUnstrustedCertificate">
+            <summary>信頼されていない接続先を許可するかを取得、設定します。</summary>
+        </member>
+        <member name="P:Baku.Websocket.Client.IWebSocket.EnableAutoSendPing">
+            <summary>自動でpingを送信するかを取得、設定します。</summary>
+        </member>
+        <member name="E:Baku.Websocket.Client.IWebSocket.Opened">
+            <summary>接続が確立されると発生します。</summary>
+        </member>
+        <member name="E:Baku.Websocket.Client.IWebSocket.MessageReceived">
+            <summary>メッセージを受信すると発生します。</summary>
+        </member>
+        <member name="E:Baku.Websocket.Client.IWebSocket.Error">
+            <summary>通信にエラーが生じると発生します。</summary>
+        </member>
+        <member name="E:Baku.Websocket.Client.IWebSocket.Closed">
+            <summary>接続が切断すると発生します。</summary>
+        </member>
+        <member name="M:Baku.Websocket.Client.IWebSocket.InitializeUrl(System.String)">
+            <summary>接続先のURLを指定して初期化します。</summary>
+            <param name="url">接続先URL</param>
+        </member>
+        <member name="M:Baku.Websocket.Client.IWebSocket.Open">
+            <summary>初期化時に指定したURLへ接続します。</summary>
+        </member>
+        <member name="M:Baku.Websocket.Client.IWebSocket.Close">
+            <summary>接続を切断します。</summary>
+        </member>
+        <member name="M:Baku.Websocket.Client.IWebSocket.Send(System.String)">
+            <summary>メッセージを送信します。</summary>
+            <param name="msg">送信するメッセージ</param>
+        </member>
+        <member name="P:Baku.Websocket.Client.IWebSocket.State">
+            <summary>WebSocketの現在の接続状態を取得します。</summary>
+        </member>
+        <member name="T:Baku.Websocket.Client.WebSocketMessageReceivedEventArgs">
+            <summary>WebSocketによりメッセージを受信した際のイベントデータを表します。</summary>
+        </member>
+        <member name="M:Baku.Websocket.Client.WebSocketMessageReceivedEventArgs.#ctor(System.String)">
+            <summary>受信したメッセージの内容でイベントデータを初期化します。</summary>
+            <param name="msg">受信したメッセージ</param>
+        </member>
+        <member name="P:Baku.Websocket.Client.WebSocketMessageReceivedEventArgs.Message">
+            <summary>受信したメッセージを取得します。</summary>
+        </member>
+        <member name="T:Baku.Websocket.Client.WebSocketErrorEventArgs">
+            <summary>通信にエラーが生じた際のイベントデータを表します。</summary>
+        </member>
+        <member name="M:Baku.Websocket.Client.WebSocketErrorEventArgs.#ctor(System.Exception)">
+            <summary>エラーの内容を表す例外インスタンスでイベントデータを初期化します。</summary>
+            <param name="ex">エラー内容</param>
+        </member>
+        <member name="P:Baku.Websocket.Client.WebSocketErrorEventArgs.Exception">
+            <summary>エラーの内容を取得します。</summary>
+        </member>
+        <member name="T:Baku.Websocket.Client.WebSocketState">
+            <summary>WebSocketの状態を表します。</summary>
+        </member>
+        <member name="F:Baku.Websocket.Client.WebSocketState.None">
+            <summary>WebSocketが未使用の状態</summary>
+        </member>
+        <member name="F:Baku.Websocket.Client.WebSocketState.Connecting">
+            <summary>WebSocketが接続を試みている状態</summary>
+        </member>
+        <member name="F:Baku.Websocket.Client.WebSocketState.Open">
+            <summary>WebSocketの接続が確立された状態</summary>
+        </member>
+        <member name="F:Baku.Websocket.Client.WebSocketState.Closing">
+            <summary>WebSocketを切断中の状態</summary>
+        </member>
+        <member name="F:Baku.Websocket.Client.WebSocketState.Closed">
+            <summary>WebSocketが切断済みの状態</summary>
+        </member>
+    </members>
+</doc>

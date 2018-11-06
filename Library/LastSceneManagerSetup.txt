@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/LibqiUnity/Samples/PepperControlSample.unity
+  isLoaded: 1
+  isActive: 1

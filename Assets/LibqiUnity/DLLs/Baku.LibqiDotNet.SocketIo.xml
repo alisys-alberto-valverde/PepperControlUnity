@@ -1,0 +1,444 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baku.LibqiDotNet.SocketIo</name>
+    </assembly>
+    <members>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiFuture">
+            <summary>Socket.io通信に基づく非同期呼び出し値を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture.IsCanceled">
+            <summary>処理がキャンセル済みであるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture.IsFinished">
+            <summary>処理が終了済であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture.IsRunning">
+            <summary>処理が実行中であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture.HasError">
+            <summary>エラーが起きたことが確定した場合<see langword="true"/>となります。処理自体が終了していない場合の値は未定義です。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.Cancel">
+            <summary>結果取得をキャンセルします。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.AddCallback(System.Action)">
+            <summary>動作完了時のコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.Wait(System.TimeSpan)">
+            <summary>指定した時間処理の完了を待機します。</summary>
+            <param name="ts">待機する時間</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.Wait">
+            <summary>無期限に待機します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.Wait(System.Int32)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CheckHasError">
+            <summary>エラーが起きたかどうかを無期限待機ののち確認します。</summary>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CheckHasError(System.Int32)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CheckHasError(System.TimeSpan)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="ts">待機時間</param>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CheckHasValue">
+            <summary>値を持っているかどうかを無期限待機ののち確認します。</summary>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CheckHasValue(System.Int32)">
+            <summary>値を持っているかどうかを待機ののち確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CheckHasValue(System.TimeSpan)">
+            <summary>値を持っているかどうかを待機ののち確認します。</summary>
+            <param name="ts">待機時間の上限</param>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture.ErrorMessage">
+            <summary>エラーがある場合、それを文字列として取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.CloneFuture">
+            <summary>
+            非同期呼び出し値の複製に相当する値を得ます。
+            実際にはこのオブjヘクト自身への参照を返します。
+            </summary>
+            <returns>このインスタンスそのもの</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.GetValue">
+            <summary>非同期処理が完了済みであれば値を取得します。
+            完了前の場合は<see cref="T:System.InvalidOperationException"/>をスローします。
+            </summary>
+            <returns>非同期処理の結果</returns>
+            <exception cref="T:System.InvalidOperationException" /> 
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.GetObject">
+            <summary>オブジェクト値を取得します。
+            非同期処理が完了する前に呼び出した場合<see cref="T:System.InvalidOperationException"/>をスローします。
+            </summary>
+            <returns>オブジェクト値</returns>
+            <exception cref="T:System.InvalidOperationException" />
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture.GetSignal">
+            <summary>シグナル値を取得します。
+            非同期処理が完了する前に呼び出した場合<see cref="T:System.InvalidOperationException"/>をスローします。
+            </summary>
+            <returns>シグナル値</returns>
+            <exception cref="T:System.InvalidOperationException" />
+        </member>
+        <member name="E:Baku.LibqiDotNet.SocketIo.QiFuture.Finished">
+            <summary>処理が完了すると発生します。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.SocketIo.QiFuture.InfiniteTimeSpan">
+            <summary>無期限の待機を表します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiFuture`1">
+            <summary><see cref="T:Baku.LibqiDotNet.SocketIo.QiFuture"/>のうち戻り値の型が明示されたものを表します。</summary>
+            <typeparam name="T">非同期呼び出しの戻り値として想定されるデータ型</typeparam>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.#ctor(Baku.LibqiDotNet.SocketIo.QiFuture)">
+            <summary>元となる<see cref="T:Baku.LibqiDotNet.SocketIo.QiFuture"/>値を指定してインスタンスを初期化します。</summary>
+            <param name="future">元となる非同期呼び出しのデータ</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture`1.IsRunning">
+            <summary>処理が実行中であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture`1.IsFinished">
+            <summary>処理が終了済であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture`1.IsCanceled">
+            <summary>処理がキャンセル済みであるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture`1.HasError">
+            <summary>エラーが起きたことが確定した場合<see langword="true"/>となります。処理自体が終了していない場合の値は未定義です。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiFuture`1.ErrorMessage">
+            <summary>エラーがある場合、それを文字列として取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.Wait(System.Int32)">
+            <summary>指定した時間まで待機します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.Wait">
+            <summary>無期限に待機します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.CheckHasError(System.Int32)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.CheckHasError">
+            <summary>エラーが起きたかどうかを無期限待機ののち確認します。</summary>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.CheckHasValue(System.Int32)">
+            <summary>値を持っているかどうかを待機ののち確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.CheckHasValue">
+            <summary>値を持っているかどうかを無期限待機ののち確認します。</summary>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.Cancel">
+            <summary>結果取得をキャンセルします。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.AddCallback(System.Action)">
+            <summary>動作完了時のコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.AddCallback(System.Action{`0})">
+            <summary>動作完了時のコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFuture`1.Get">
+            <summary>
+            呼び出し結果を取得します。
+            型<typeparamref name="T"/>が実際の戻り値と食い違っていたり
+            <see cref="P:Baku.LibqiDotNet.IQiFuture.IsFinished"/>が<see langword="false"/>場合に呼び出すと
+            例外が送出される可能性があります。
+            </summary>
+            <returns>呼び出し結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiFutureExtensions">
+            <summary>><see cref="T:Baku.LibqiDotNet.SocketIo.QiFuture"/>クラスへ拡張機能を提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiFutureExtensions.WillReturns``1(Baku.LibqiDotNet.SocketIo.QiFuture)">
+            <summary>
+            <see cref="T:Baku.LibqiDotNet.SocketIo.QiFuture"/>型で生成した非同期呼び出しが実際には<typeparamref name="T"/>型の
+            戻り値を返すことを宣言し、戻り値のある非同期呼び出しとして扱えるようにします。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="future"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiMethod">
+            <summary>JSONオブジェクト情報に基づくメソッドを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiMethod.#ctor(System.String,Baku.LibqiDotNet.SocketIo.QiSession,Baku.LibqiDotNet.SocketIo.QiObject)">
+            <summary>メソッド名、セッション、元となるサービスインスタンスを用いてインスタンスを初期化します。</summary>
+            <param name="name">メソッド名</param>
+            <param name="session">通信に用いているセッション</param>
+            <param name="qiobj">このメソッドが属するサービスインスタンス</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiMethod.Name">
+            <summary>メソッド名を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiMethod.CallAsync(System.Object[])">
+            <summary>引数を与えてメソッドを非同期で呼び出します。</summary>
+            <param name="args">メソッドの引数一覧</param>
+            <returns>呼び出したメソッドに応じた戻り値を持つ非同期呼び出し結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiMethod.CallAsync``1(System.Object[])">
+            <summary>引数を与えてメソッドを非同期で呼び出します。</summary>
+            <typeparam name="T">結果の型</typeparam>
+            <param name="args">メソッドの引数一覧</param>
+            <returns>呼び出したメソッドに応じた戻り値を持つ非同期呼び出し結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiMethods">
+            <summary>JSONオブジェクト情報に基づくメソッド一覧を表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiMethods.Item(System.String)">
+            <summary>メソッド名を指定してメソッドを取得します。</summary>
+            <param name="name">メソッド名</param>
+            <returns>指定された名前のメソッド</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException" />
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiObject">
+            <summary>Socket.io通信に基づいたサービスオブジェクトを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiObject.#ctor(Baku.LibqiDotNet.SocketIo.QiSession,Newtonsoft.Json.Linq.JObject)">
+            <summary>通信に用いたセッションとサービス内容を表すJSONオブジェクトを用いてインスタンスを初期化します。</summary>
+            <param name="session">通信に用いたセッション</param>
+            <param name="jobj">サービス内容を表すJSONオブジェクト</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiObject.Item(System.String)">
+            <summary>メソッド名を指定して対応するメソッドを取得します。</summary>
+            <param name="methodName">メソッド名</param>
+            <returns>メソッド</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiObject.Id">
+            <summary>このサービスインスタンスに対応づけられた一意な整数値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiObject.Name">
+            <summary>サービス名を取得します。実際には<see cref="P:Baku.LibqiDotNet.SocketIo.QiObject.Id"/>を文字列にした値を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiObject.Description">
+            <summary>サービスの概要を説明した要約文を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiObject.GetProperty``1(System.String)">
+            <summary>[NOT SUPPORTED]</summary>
+            <typeparam name="T"></typeparam>
+            <param name="pname"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiObject.SetProperty(System.String,System.Object)">
+            <summary>[NOT SUPPORTED]</summary>
+            <param name="pname"></param>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiPromise">
+            <summary><see cref="T:Baku.LibqiDotNet.SocketIo.QiFuture"/>に結果を与える遅延処理を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiPromise.Finish(Newtonsoft.Json.Linq.JToken)">
+            <summary>タスクを正常終了します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiPromise.Fail(System.String)">
+            <summary>タスクを失敗終了し、エラー内容を文字列として設定します。</summary>
+            <param name="error"></param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiPromise.Cancel">
+            <summary>タスクをキャンセルします。</summary>
+        </member>
+        <member name="E:Baku.LibqiDotNet.SocketIo.QiPromise.Finished">
+            <summary>処理が成功、キャンセル、エラーのいずれかで終了すると発生します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.PromiseStates">
+            <summary>Promiseの実行状態を表します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiSession">
+            <summary>Socket.ioを利用するセッションを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.#ctor(Baku.Websocket.Client.IWebSocket)">
+            <summary>通信に用いるWebSocketを用いてインスタンスを初期化します。</summary>
+            <param name="ws">通信に使用するWebSocket</param>
+        </member>
+        <member name="F:Baku.LibqiDotNet.SocketIo.QiSession.DefaultPortNumber">
+            <summary>Socket.ioで通信する場合のポート番号のデフォルト値です。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.ConnectAsync(System.String)">
+            <summary>接続先に接続します。</summary>
+            <param name="address">接続先アドレス</param>
+            <returns>接続の非同期処理を表す値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.Close">
+            <summary>接続先と切断します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.GetEndpoints">
+            <summary>
+            この実装ではGetEndPoints関数はサポートされていません。
+            常に<see cref="T:System.NotImplementedException"/>をスローします。
+            </summary>
+            <returns>結果は取得できません。</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.GetServiceAsync(System.String)">
+            <summary>サービス名を指定してサービスを非同期で取得します。</summary>
+            <param name="name">サービス名</param>
+            <returns>指定した名前のサービス</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiSession.IsConnected">
+            <summary>セッションが接続済みかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiSession.IsServiceRegistrationSupported">
+            <summary>
+            サービスの登録/登録解除が可能かを取得します。この実装ではつねに<see langword="false"/>を返します。
+            </summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.ListenAsync(System.String,System.Boolean)">
+            <summary>[NOT SUPPORTED]</summary>
+            <param name="address"></param>
+            <param name="standAlone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.RegisterServiceAsync(System.String,Baku.LibqiDotNet.IQiObject)">
+            <summary>[NOT SUPPORTED]</summary>
+            <param name="name"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSession.UnregisterServiceAsync(System.UInt32)">
+            <summary>[NOT SUPPORTED]</summary>
+            <param name="idx"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiSignal">
+            <summary>Socket.ioによる非同期イベント処理の送受信器を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSignal.#ctor(Baku.LibqiDotNet.SocketIo.QiSession,Newtonsoft.Json.Linq.JObject)">
+            <summary>取得したJObjectと取得元セッションを用いてシグナルインスタンスを初期化します。</summary>
+            <param name="session">データの取得元セッション</param>
+            <param name="jobj">シグナル情報を表すJSONオブジェクト</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiSignal.Id">
+            <summary>シグナルに対応づけられた一意な番号を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSignal.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>シグナル受信時の処理を登録します。</summary>
+            <param name="handler">受信時に呼ばれるハンドラ関数</param>
+            <returns>登録の非同期処理状態</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiSignal.DisconnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>シグナル受信時の処理を登録解除します。</summary>
+            <param name="handler"><see cref="M:Baku.LibqiDotNet.SocketIo.QiSignal.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})"/>で登録したハンドラ関数</param>
+            <returns>登録解除の非同期処理状態</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiSignal.SignalName">
+            <summary>シグナルに対応するSocket.IOのイベント名を取得します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.SocketIo.QiValue">
+            <summary>Socket.ioで送受信するJSONに基づいた非同期処理データを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.#ctor(Newtonsoft.Json.Linq.JToken)">
+            <summary>指定したJTokenでインスタンスを初期化します。</summary>
+            <param name="token">実際のデータを表すJSONトークンデータ</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiValue.Item(Baku.LibqiDotNet.IQiResult)">
+            <summary>
+            データが辞書型データであると想定し、キー指定によって値を取得します。
+            </summary>
+            <param name="key">キーとなるデータ</param>
+            <returns>キーに対応した値</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiValue.Item(System.Int32)">
+            <summary>
+            データがリストまたはタプル型であると想定し、インデクス指定で要素を取得します。
+            リストまたはタプルの要素数を得るには<see cref="P:Baku.LibqiDotNet.SocketIo.QiValue.Count"/>値を取得してください。
+            </summary>
+            <param name="index">リストまたはタプルのインデクス(0以上の値)。境界値チェックは行われません。</param>
+            <returns>指定したインデクスでの要素の値</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiValue.Count">
+            <summary>
+            データがリスト、タプル、辞書型データのいずれかであると想定して要素数を取得します。
+            これらの型ではない場合、要素数として0を返します。
+            </summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiValue.Keys">
+            <summary>データが辞書型データであると想定してキーの一覧を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.SocketIo.QiValue.MapItems">
+            <summary>データが辞書型データであると想定してキー/値のペア一覧を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.Dump">
+            <summary>ラクにJSONを吐く</summary>
+            <returns></returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToString">
+            <summary>実態がJTokenに皮ペラ一枚被せたものであることを認めて潔く、ね。</summary>
+            <returns>内部表現であるJSONの文字列版</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToBytes">
+            <summary>データがバイト配列の場合そのデータを取得し、そうでなければ要素数0のバイト配列を取得します。</summary>
+            <returns>バイト配列に変換されたデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToBool">
+            <summary>データがブール値と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToSByte">
+            <summary>データが符号あり1バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToInt16">
+            <summary>データが符号あり2バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToInt32">
+            <summary>データが符号あり4バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToInt64">
+            <summary>データが符号あり8バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToByte">
+            <summary>データが符号なし1バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToUInt16">
+            <summary>データが符号なし2バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToUInt32">
+            <summary>データが符号なし4バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToUInt64">
+            <summary>データが符号なし8バイト整数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToFloat">
+            <summary>データが単精度小数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToDouble">
+            <summary>データが倍精度小数と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.SocketIo.QiValue.ToQiString">
+            <summary>データが文字列と想定してデータを取得します。</summary>
+            <returns>取得したデータ</returns>
+        </member>
+    </members>
+</doc>

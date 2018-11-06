@@ -1,0 +1,689 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SocketIoClient</name>
+    </assembly>
+    <members>
+        <member name="T:SocketIOClient.Client">
+            <summary>
+            Class to emulate socket.io javascript client capabilities for .net classes
+            </summary>
+            <exception cref = "T:System.ArgumentException">Connection for wss or https urls</exception>  
+        </member>
+        <member name="F:SocketIOClient.Client.padLock">
+            <summary>Allow one connection attempt at a time</summary>
+        </member>
+        <member name="F:SocketIOClient.Client._uri">
+            <summary>Uri of Websocket server</summary>
+        </member>
+        <member name="F:SocketIOClient.Client.wsClient">
+            <summary>WebSocket implementation</summary>
+        </member>
+        <member name="F:SocketIOClient.Client.registrationManager">
+            <summary>RegistrationManager for dynamic events</summary>
+        </member>
+        <member name="E:SocketIOClient.Client.Opened">
+            <summary>接続時に発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.Client.ReceivedMessage">
+            <summary>メッセージの受信時に発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.Client.ConnectionRetry">
+            <summary>再接続を行う際に発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.Client.HeartBeatSent">
+            <summary>ハートビート送信時に発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.Client.Closed">
+            <summary>通信切断時に発生sます。</summary>
+        </member>
+        <member name="E:SocketIOClient.Client.Error">
+            <summary>エラー発生時に発生します。</summary>
+        </member>
+        <member name="F:SocketIOClient.Client._messageQueueEmptyEvent">
+            <summary>ResetEvent for Outbound MessageQueue Empty Event - all pending messages have been sent</summary>
+        </member>
+        <member name="F:SocketIOClient.Client._connectionOpenEvent">
+            <summary>Connection Open Event</summary>
+        </member>
+        <member name="P:SocketIOClient.Client.RetryConnectionAttempts">
+            <summary>
+            Number of reconnection attempts before raising SocketConnectionClosed event - (default = 3)
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Client.LastErrorMessage">
+            <summary>直近のエラーメッセージを取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Client.Path">
+            <summary>Abs Path to socket.io service(default is : "/socket.io/")</summary>
+        </member>
+        <member name="P:SocketIOClient.Client.HandShake">
+            <summary>The initial handshake parameters received from the socket.io service (SID, HeartbeatTimeout etc)</summary>
+        </member>
+        <member name="P:SocketIOClient.Client.IsConnected">
+            <summary> Get if the connection is established </summary>
+        </member>
+        <member name="P:SocketIOClient.Client.ReadyState">
+            <summary> Get the connection state of websocket client (None, Connecting, Open, Closing, Closed)</summary>
+        </member>
+        <member name="M:SocketIOClient.Client.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Client.Connect(System.String,Baku.Websocket.Client.IWebSocket)">
+            <summary>Initiate the connection with Socket.IO service</summary>
+        </member>
+        <member name="M:SocketIOClient.Client.On(System.String,System.Action{SocketIOClient.Messages.IMessage})">
+            <summary>
+            <para>Asynchronously calls the action delegate on event message notification</para>
+            <para>Mimicks the Socket.IO client 'socket.on('name',function(data){});' pattern</para>
+            <para>Reserved socket.io event names available: connect, disconnect, open, close, error, retry, reconnect  </para>
+            </summary>
+            <param name="eventName"></param>
+            <param name="action"></param>
+            <example>
+            client.On("testme", (data) =>
+               {
+                   Debug.WriteLine(data.ToJson());
+               });
+            </example>
+        </member>
+        <member name="M:SocketIOClient.Client.On(System.String,System.String,System.Action{SocketIOClient.Messages.IMessage})">
+            <summary>イベント名、エンドポイント、コールバックをセットとして登録します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="endPoint">エンドポイント</param>
+            <param name="action">イベント名に対応するコールバック処理</param>
+        </member>
+        <member name="M:SocketIOClient.Client.Emit(System.String,System.Object,System.String,System.Action{Newtonsoft.Json.Linq.JToken})">
+            <summary>
+            <para>Asynchronously sends payload using eventName</para>
+            <para>payload must a string or Json Serializable</para>
+            <para>Mimicks Socket.IO client 'socket.emit('name',payload);' pattern</para>
+            <para>Do not use the reserved socket.io event names: connect, disconnect, open, close, error, retry, reconnect</para>
+            </summary>
+            <param name="eventName"></param>
+            <param name="payload">must be a string or a Json Serializable object</param>
+            <param name="endPoint">エンドポイント</param>
+            <param name="callback">コールバック関数</param>
+            <remarks>ArgumentOutOfRangeException will be thrown on reserved event names</remarks>
+        </member>
+        <member name="M:SocketIOClient.Client.Emit(System.String,System.Object)">
+            <summary>
+            <para>Asynchronously sends payload using eventName</para>
+            <para>payload must a string or Json Serializable</para>
+            <para>Mimicks Socket.IO client 'socket.emit('name',payload);' pattern</para>
+            <para>Do not use the reserved socket.io event names: connect, disconnect, open, close, error, retry, reconnect</para>
+            </summary>
+            <param name="eventName"></param>
+            <param name="payload">must be a string or a Json Serializable object</param>
+        </member>
+        <member name="M:SocketIOClient.Client.Emit(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>イベント名とイベント内容のJSONオブジェクトを指定してイベント情報を送信します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="payload">イベント名とともに送信されるデータ</param>
+        </member>
+        <member name="M:SocketIOClient.Client.Send(SocketIOClient.Messages.IMessage)">
+            <summary>
+            Queue outbound message
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:SocketIOClient.Client.Send(System.String)">
+            <summary>文字列を指定してメッセージを送信します。</summary>
+            <param name="msg">送信するメッセージ</param>
+        </member>
+        <member name="M:SocketIOClient.Client.OnMessageEvent(SocketIOClient.Messages.IMessage)">
+            <summary>
+            if a registerd event name is found, don't raise the more generic Message event
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:SocketIOClient.Client.Close">
+            <summary>Close SocketIO4Net.Client and clear all event registrations </summary>
+        </member>
+        <member name="M:SocketIOClient.Client.wsClient_MessageReceived(System.Object,Baku.Websocket.Client.WebSocketMessageReceivedEventArgs)">
+            <summary>
+            Raw websocket messages from server - convert to message types and call subscribers of events and/or callbacks
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SocketIOClient.Client.wsClient_Closed(System.Object,System.EventArgs)">
+            <summary>
+            websocket has closed unexpectedly - retry connection
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:SocketIOClient.Client.DequeueOutboundMessages">
+            <summary>While connection is open, dequeue and send messages to the socket server</summary>
+        </member>
+        <member name="M:SocketIOClient.Client.RequestHandshake(System.Uri)">
+            <summary>
+            <para>Client performs an initial HTTP POST to obtain a SessionId (sid) assigned to a client, followed
+             by the heartbeat timeout, connection closing timeout, and the list of supported transports.</para>
+            <para>The tansport and sid are required as part of the ws: transport connection</para>
+            </summary>
+            <param name="uri">http://localhost:3000</param>
+            <returns>Handshake object with sid value</returns>
+            <example>DownloadString: 13052140081337757257:15:25:websocket,htmlfile,xhr-polling,jsonp-polling</example>
+        </member>
+        <member name="M:SocketIOClient.Client.Dispose">
+            <summary>接続を切断し、リソースを解放します。</summary>
+        </member>
+        <member name="T:SocketIOClient.ErrorEventArgs">
+            <summary>エラーイベントのイベントデータを表します。</summary>
+        </member>
+        <member name="P:SocketIOClient.ErrorEventArgs.Message">
+            <summary>エラーメッセージを取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.ErrorEventArgs.Exception">
+            <summary>発生した例外を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.ErrorEventArgs.#ctor(System.String)">
+            <summary>エラーメッセージのみを指定してインスタンスを初期化します。</summary>
+            <param name="message">エラーメッセージ</param>
+        </member>
+        <member name="M:SocketIOClient.ErrorEventArgs.#ctor(System.String,System.Exception)">
+            <summary>エラーメッセージと例外を指定してインスタンスを初期化します。</summary>
+            <param name="message">エラーメッセージ</param>
+            <param name="exception">エラー</param>
+        </member>
+        <member name="M:SocketIOClient.JsonTextSerialization.Serialize(System.Object)">
+            <summary>Serialize object to JSON-like string by default setting</summary>
+        </member>
+        <member name="T:SocketIOClient.SocketIOHandshake">
+            <summary>通信開始時のハンドシェーク処理設定を表します。</summary>
+        </member>
+        <member name="M:SocketIOClient.SocketIOHandshake.#ctor">
+            <summary>既定の状態でハンドシェークインスタンスを初期化します。</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.SID">
+            <summary>接続IDを取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.ConnectionTimeout">
+            <summary>接続タイムアウトを取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.HeartbeatTimeout">
+            <summary>Heart beatのタイムアウトを取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.HeartbeatInterval">
+            <summary>The Interval will be approxamately 20% faster than the Socket.IO service indicated was required</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.Transports">
+            <summary>HTTPレスポンス文字列の一部を取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.ErrorMessage">
+            <summary>エラーメッセージを取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.SocketIOHandshake.HadError">
+            <summary>エラーの有無を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.SocketIOHandshake.LoadFromString(System.String)">
+            <summary>HTTPのレスポンス文字列からハンドシェークインスタンスを生成します。</summary>
+            <param name="value">レスポンス文字列</param>
+            <returns>レスポンスに基づいて初期化されたハンドシェークインスタンス</returns>
+        </member>
+        <member name="T:SocketIOClient.SocketIOMessageTypes">
+            <summary>Socket.io's message types.</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Disconnect">
+            <summary>Signals disconnection. If no endpoint is specified, disconnects the entire socket.</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Connect">
+            <summary>Only used for multiple sockets. Signals a connection to the endpoint. Once the server receives it, it's echoed back to the client.</summary> 
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Heartbeat">
+            <summary>Heart beat message, to ensure the connection</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Message">
+            <summary>A regular message</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.JSONMessage">
+            <summary>A JSON message</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Event">
+            <summary>An event is like a JSON message, but has mandatory name and args fields.</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.ACK">
+            <summary>An acknowledgment contains the message id as the message data. If a + sign follows the message id, it's treated as an event message packet.</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Error">
+            <summary>Error</summary>
+        </member>
+        <member name="F:SocketIOClient.SocketIOMessageTypes.Noop">
+            <summary>No operation</summary>
+        </member>
+        <member name="T:SocketIOClient.IClient">
+            <summary>C# Socket.IO client interface</summary>
+        </member>
+        <member name="E:SocketIOClient.IClient.Opened">
+            <summary>通信が確立すると発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.IClient.ReceivedMessage">
+            <summary>メッセージを受信すると発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.IClient.Closed">
+            <summary>通信が切断すると発生します。</summary>
+        </member>
+        <member name="E:SocketIOClient.IClient.Error">
+            <summary>通信時にエラーが起きると発生します。</summary>
+        </member>
+        <member name="P:SocketIOClient.IClient.HandShake">
+            <summary>ハンドシェーク処理設定を取得します、</summary>
+        </member>
+        <member name="P:SocketIOClient.IClient.IsConnected">
+            <summary>接続済みかどうかを取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.IClient.Path">
+            <summary>接続時のパスを取得、設定します。</summary>
+        </member>
+        <member name="M:SocketIOClient.IClient.Connect(System.String,Baku.Websocket.Client.IWebSocket)">
+            <summary>URLを指定して接続します。</summary>
+            <param name="url">接続先URL</param>
+            <param name="ws">接続の元となるWebSocketの実装</param>
+        </member>
+        <member name="M:SocketIOClient.IClient.Close">
+            <summary>接続を切断します。</summary>
+        </member>
+        <member name="M:SocketIOClient.IClient.Dispose">
+            <summary>接続を切断し、リソースを解放します。</summary>
+        </member>
+        <member name="M:SocketIOClient.IClient.On(System.String,System.Action{SocketIOClient.Messages.IMessage})">
+            <summary>イベント発生時のハンドラ処理を登録します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="action">コールバック処理</param>
+        </member>
+        <member name="M:SocketIOClient.IClient.On(System.String,System.String,System.Action{SocketIOClient.Messages.IMessage})">
+            <summary>イベント発生時のハンドラ処理を登録します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="endPoint">エンドポイント</param>
+            <param name="action">コールバック処理</param>
+        </member>
+        <member name="M:SocketIOClient.IClient.Emit(System.String,System.Object)">
+            <summary>イベントを発生させます。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="payload">イベントに付随させるデータ</param>
+        </member>
+        <member name="M:SocketIOClient.IClient.Emit(System.String,System.Object,System.String,System.Action{Newtonsoft.Json.Linq.JToken})">
+            <summary>イベントを発生させます。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="payload">イベントに付随させるデータ</param>
+            <param name="endPoint">エンドポイント</param>
+            <param name="callBack">コールバック処理</param>
+        </member>
+        <member name="M:SocketIOClient.IClient.Send(SocketIOClient.Messages.IMessage)">
+            <summary>メッセージを送信します。</summary>
+            <param name="msg">メッセージ</param>
+        </member>
+        <member name="T:SocketIOClient.MessageEventArgs">
+            <summary>メッセージ受信時のイベントデータを表します。</summary>
+        </member>
+        <member name="P:SocketIOClient.MessageEventArgs.Message">
+            <summary>受信したメッセージを取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.MessageEventArgs.#ctor(SocketIOClient.Messages.IMessage)">
+            <summary>メッセージによってインスタンスを初期化します。</summary>
+            <param name="msg">受信したメッセージ</param>
+        </member>
+        <member name="T:SocketIOClient.Messages.AckMessage">
+            <summary>Ackメッセージを表します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.AckMessage.NextAckID">
+            <summary>Ack IDとして使用可能な次の値を取得します。</summary>
+        </member>
+        <member name="F:SocketIOClient.Messages.AckMessage.Callback">
+            <summary>コールバック処理を取得、設定します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.AckMessage.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.AckMessage.Deserialize(System.String)">
+            <summary>受信メッセージから対応するAckメッセージを生成します。</summary>
+            <param name="rawMessage">socket.ioプロトコル準拠なメッセージ</param>
+            <returns>対応するメッセージ</returns>
+        </member>
+        <member name="P:SocketIOClient.Messages.AckMessage.Encoded">
+            <summary>設定をもとに送信メッセージを取得します。</summary>
+        </member>
+        <member name="T:SocketIOClient.Messages.ConnectMessage">
+            <summary>
+            Signals a connection to the endpoint. Once the server receives it, it's echoed back to the client
+            </summary>
+            <remarks>If the client is trying to connect to the endpoint /test, a message like this will be delivered:
+            	'1::' [path] [query]
+            </remarks>
+        </member>
+        <member name="P:SocketIOClient.Messages.ConnectMessage.Query">
+            <summary>接続時のクエリ文字列を取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.ConnectMessage.Event">
+            <summary>イベント名を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.ConnectMessage.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.ConnectMessage.#ctor(System.String)">
+            <summary>エンドポイントを指定してインスタンスを初期化します。</summary>
+            <param name="endPoint">エンドポイント</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.ConnectMessage.Deserialize(System.String)">
+            <summary>受信したメッセージから対応する接続メッセージを生成します。</summary>
+            <param name="rawMessage">受信時のsocket.ioプロトコル準拠なメッセージ</param>
+            <returns>対応するメッセージ</returns>
+        </member>
+        <member name="P:SocketIOClient.Messages.ConnectMessage.Encoded">
+            <summary>設定をもとにした送信時のメッセージ文字列を取得します。</summary>
+        </member>
+        <member name="T:SocketIOClient.Messages.DisconnectMessage">
+            <summary>
+            Signals disconnection. If no endpoint is specified, disconnects the entire socket.
+            </summary>
+            <remarks>Disconnect a socket connected to the /test endpoint:
+            	0::/test
+            </remarks>
+        </member>
+        <member name="P:SocketIOClient.Messages.DisconnectMessage.Event">
+            <summary>イベント名を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.DisconnectMessage.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.DisconnectMessage.#ctor(System.String)">
+            <summary>エンドポイントを指定してインスタンスを初期化します。</summary>
+            <param name="endPoint">エンドポイント</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.DisconnectMessage.Deserialize(System.String)">
+            <summary>受信したメッセージから対応する切断メッセージを取得します。</summary>
+            <param name="rawMessage">受信したsocket.ioプロトコル準拠なメッセージ</param>
+            <returns>対応する切断メッセージ</returns>
+        </member>
+        <member name="P:SocketIOClient.Messages.DisconnectMessage.Encoded">
+            <summary>切断メッセージを取得します。</summary>
+        </member>
+        <member name="T:SocketIOClient.Messages.ErrorMessage">
+            <summary>エラー通知メッセージを表します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.ErrorMessage.Reason">
+            <summary>エラーの理由を表す文字列を取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.ErrorMessage.Advice">
+            <summary>エラーの対策などを表す文字列を取得、設定します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.ErrorMessage.Event">
+            <summary>イベント名を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.ErrorMessage.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.ErrorMessage.Deserialize(System.String)">
+            <summary>メッセージ文字列から対応するメッセージを取得します。</summary>
+            <param name="rawMessage">'7::' [endpoint] ':' [reason] '+' [advice]</param>
+            <returns>ErrorMessage</returns>
+        </member>
+        <member name="T:SocketIOClient.Messages.EventMessage">
+            <summary>イベントメッセージを表します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.EventMessage.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.EventMessage.#ctor(System.String,System.Object,System.String,System.Action{Newtonsoft.Json.Linq.JToken})">
+            <summary>イベント名、JSONオブジェクト、エンドポイント、コールバックを指定してインスタンスを初期化します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="jsonObject">JSONオブジェクト</param>
+            <param name="endpoint">エンドポイント</param>
+            <param name="callBack">コールバック処理</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.EventMessage.#ctor(System.String,System.Object)">
+            <summary>イベント名、JSONオブジェクトを指定してインスタンスを初期化します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="jsonObject">JSONオブジェクト</param>
+        </member>
+        <member name="P:SocketIOClient.Messages.EventMessage.Callback">
+            <summary>コールバック処理を取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.EventMessage.Args">
+            <summary>JSONオブジェクトから抽出した引数一覧を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.EventMessage.Deserialize(System.String)">
+            <summary>受信した文字列から対応するメッセージを生成します。</summary>
+            <param name="rawMessage">生のsocket.ioプロトコル準拠な文字列</param>
+            <returns>対応するメッセージ</returns>
+        </member>
+        <member name="P:SocketIOClient.Messages.EventMessage.Encoded">
+            <summary>メッセージとして送信できる文字列を取得します。</summary>
+        </member>
+        <member name="T:SocketIOClient.Messages.Heartbeat">
+            <summary>一定時間ごとに通信の生存を通知するためのハートビートメッセージを表します。</summary>
+        </member>
+        <member name="F:SocketIOClient.Messages.Heartbeat.HEARTBEAT">
+            <summary>ハートビートの定型メッセージです。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Heartbeat.Encoded">
+            <summary>ハートビートのメッセージ文字列を取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Heartbeat.Instance">
+            <summary>ハートビートメッセージのシングルトンインスタンスを取得します。</summary>
+        </member>
+        <member name="T:SocketIOClient.Messages.IMessage">
+            <summary>
+            Interface for core Message class
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.MessageType">
+            <summary>
+            Enumeration of one of 9 basic messages provided by socket.io
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.RawMessage">
+            <summary>
+            <para>RawMessage includes the full socket.io message string</para>
+            <para>[message type] ':' [message id ('+')] ':' [message endpoint] (':' [message data]) </para>
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.Event">
+            <summary>
+            Event 'name' of originating message
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.AckId">
+            <summary>
+            AckId represents unique id associated with a message callback
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.Endpoint">
+            <summary>
+            Each socket is identified by an endpoint (can be omitted).
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.MessageText">
+            <summary>
+            String version of message data
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.IMessage.Encoded">
+            <summary>
+            <para>Socket.IO encoded message structure - represents the actual message string sent to Socket.IO </para>
+            <para>[message type] ':' [message id ('+')] ':' [message endpoint] (':' [message data]) </para>
+            </summary>
+        </member>
+        <member name="T:SocketIOClient.Messages.JSONMessage">
+            <summary>JSONデータからなるメッセージを表します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.#ctor">
+            <summary>既定値でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.#ctor(System.Object)">
+            <summary>JSONオブジェクトを指定してインスタンスを初期化します、。</summary>
+            <param name="jsonObject">JSONオブジェクト</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.#ctor(System.Object,System.Nullable{System.Int32},System.String)">
+            <summary>JSONオブジェクトとAck Idおよびエンドポイントを指定してインスタンスを初期化します、。</summary>
+            <param name="jsonObject">JSONオブジェクト</param>
+            <param name="ackId">ACK ID</param>
+            <param name="endpoint">エンドポイント</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.SetMessage(System.Object)">
+            <summary>JSONオブジェクトと考えられるデータを用いてメッセージを設定します。</summary>
+            <param name="value">JSONオブジェクト</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.Message``1">
+            <summary>デシリアライズする型を指定してメッセージをデシリアライズします。</summary>
+            <typeparam name="T">デシリアライズ先の型</typeparam>
+            <returns>指定した型のデータ</returns>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.Deserialize(System.String)">
+            <summary>Socket.ioのメッセージ文字列から対応するメッセージを生成します。</summary>
+            <param name="rawMessage">生のsocket.io文字列</param>
+            <returns>対応するメッセージ</returns>
+        </member>
+        <member name="M:SocketIOClient.Messages.JSONMessage.CreateFromJObject(Newtonsoft.Json.Linq.JObject)">
+            <summary>JSONオブジェクトからメッセージを生成します。</summary>
+            <param name="jobj">JSONオブジェクト</param>
+            <returns>JSONオブジェクトをメッセージとしたメッセージ</returns>
+        </member>
+        <member name="T:SocketIOClient.Messages.Message">
+            <summary>
+            All Socket.IO messages have to be encoded before they're sent, and decoded when they're received.
+            They all have the format of: [message type] ':' [message id ('+')] ':' [message endpoint] (':' [message data])
+            </summary>
+        </member>
+        <member name="F:SocketIOClient.Messages.Message.SPLITCHARS">
+            <summary>Socket.ioでデータを区切る文字です。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.RawMessage">
+            <summary>受信時の状態から加工していないそのままの文字列を取得します。</summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.MessageType">
+            <summary>
+            The message type represents a single digit integer [0-8].
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.AckId">
+            <summary>
+            The message id is an incremental integer, required for ACKs (can be ommitted). 
+            If the message id is followed by a +, the ACK is not handled by socket.io, but by the user instead.
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.Endpoint">
+            <summary>
+            Socket.IO has built-in support for multiple channels of communication (which we call "multiple sockets"). 
+            Each socket is identified by an endpoint (can be omitted).
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.MessageText">
+            <summary>
+            String value of the message
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.Event">
+            <summary>
+            String value of the Event
+            </summary>
+        </member>
+        <member name="P:SocketIOClient.Messages.Message.Encoded">
+            <summary>
+            <para>Messages have to be encoded before they're sent. The structure of a message is as follows:</para>
+            <para>[message type] ':' [message id ('+')] ':' [message endpoint] (':' [message data])</para>
+            <para>All message payloads are sent as strings</para>
+            </summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.Message.#ctor">
+            <summary>メッセージインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.Message.#ctor(System.String)">
+            <summary>生のメッセージ文字列を用いてインスタンスを初期化します。</summary>
+            <param name="rawMessage">メッセージ文字列</param>
+        </member>
+        <member name="M:SocketIOClient.Messages.Message.Factory(System.String)">
+            <summary>生のメッセージをもとに対応する種類のメッセージを生成します。</summary>
+            <param name="rawMessage">Socket.ioプロトコル準拠な生の文字列</param>
+            <returns>対応するメッセージ</returns>
+        </member>
+        <member name="T:SocketIOClient.Messages.NoopMessage">
+            <summary>Defined as No operation. Used for example to close a poll after the polling duration times out.</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.NoopMessage.#ctor">
+            <summary>既定のデータでメッセージの内容を初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.NoopMessage.Deserialize(System.String)">
+            <summary>取得した文字列に関係なく何もしないメッセージを生成します。</summary>
+            <param name="rawMessage">受信したSocket.ioのプロトコル準拠な文字列</param>
+            <returns>何もしないメッセージ</returns>
+        </member>
+        <member name="T:SocketIOClient.Messages.TextMessage">
+            <summary>プレーンなテキストメッセージを表します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.TextMessage.#ctor">
+            <summary>既定の内容でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.TextMessage.#ctor(System.String)">
+            <summary>送信するメッセージを指定してインスタンスを初期化します。</summary>
+            <param name="textMessage">送信するメッセージ</param>
+        </member>
+        <member name="P:SocketIOClient.Messages.TextMessage.Event">
+            <summary>イベント文字列を取得します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Messages.TextMessage.Deserialize(System.String)">
+            <summary>生のSocket.IO文字列から対応するテキストメッセージを取得します。</summary>
+            <param name="rawMessage">Socket.IOのプロトコルに従った文字列</param>
+            <returns>デシリアライズされたメッセージ</returns>
+        </member>
+        <member name="T:SocketIOClient.Eventing.RegistrationManager">
+            <summary>Socket.IOのメッセージコールバック処理器を表します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.#ctor">
+            <summary>既定の状態にインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.AddCallBack(System.Int32,System.Action{Newtonsoft.Json.Linq.JToken})">
+            <summary>IDとコールバック関数を登録します。</summary>
+            <param name="ackId">ACK ID</param>
+            <param name="callback">IDに対応するコールバック処理</param>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.InvokeCallBack(System.Nullable{System.Int32},System.String)">
+            <summary>IDとメッセージに基づいてコールバックを呼び出します。</summary>
+            <param name="ackId">ACK ID</param>
+            <param name="value">メッセージ</param>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.AddOnEvent(System.String,System.Action{SocketIOClient.Messages.IMessage})">
+            <summary>イベントコールバックを登録します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="callback">コールバック関数</param>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.AddOnEvent(System.String,System.String,System.Action{SocketIOClient.Messages.IMessage})">
+            <summary>イベントコールバックを登録します。</summary>
+            <param name="eventName">イベント名</param>
+            <param name="endPoint">エンドポイント名</param>
+            <param name="callback">コールバック関数</param>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.InvokeOnEvent(SocketIOClient.Messages.IMessage)">
+            <summary>イベントメッセージの受信時、必要ならコールバック処理を呼び出します。</summary>
+        </member>
+        <member name="M:SocketIOClient.Eventing.RegistrationManager.Dispose">
+            <summary>コールバック登録を解除し、リソースを解放します。</summary>
+        </member>
+        <member name="T:System.Collections.Concurrent.ConcurrentQueue`1">
+            <summary>コンカレントなキューを表します。</summary>
+            <typeparam name="T">キューに格納するアイテムの型</typeparam>
+        </member>
+        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.#ctor">
+            <summary>既定の設定でインスタンスを初期化します。</summary>
+        </member>
+        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.#ctor(System.Int32)">
+            <summary>キューの容量を指定してインスタンスを初期化します。</summary>
+            <param name="capacity">キュー容量</param>
+        </member>
+        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>元となるアイテムを指定してインスタンスを初期化します。</summary>
+            <param name="collection">元となるアイテム一覧</param>
+        </member>
+        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.Enqueue(`0)">
+            <summary>アイテムをキューに追加します。</summary>
+            <param name="item">追加するアイテム</param>
+        </member>
+        <member name="M:System.Collections.Concurrent.ConcurrentQueue`1.TryDequeue(`0@)">
+            <summary>アイテム取り出しを試みます。</summary>
+            <param name="item">取り出し結果</param>
+            <returns>取り出しに成功したかどうか</returns>
+        </member>
+    </members>
+</doc>

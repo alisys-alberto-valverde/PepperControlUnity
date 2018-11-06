@@ -1,0 +1,483 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Baku.LibqiDotNet.Interface</name>
+    </assembly>
+    <members>
+        <member name="T:Baku.LibqiDotNet.IQiApplication">
+            <summary>Qiのアプリケーション(サーバ的処理の担当オブジェクト)を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiApplication.Run">
+            <summary>サーバとしてアプリケーションを実行します。クライアントでは呼び出しは必要ありません。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiApplication.Stop">
+            <summary>アプリケーションを停止します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiFuture">
+            <summary>Qiの非同期呼び出し処理のうち戻り値取得を含まないインターフェースを定義します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.Wait(System.Int32)">
+            <summary>指定した時間まで待機します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.Wait">
+            <summary>無期限に待機します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.CheckHasError(System.Int32)">
+            <summary>エラーが起きたかどうかを待機しつつ確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.CheckHasError">
+            <summary>エラーが起きたかどうかを無期限待機ののち確認します。</summary>
+            <returns>エラーの有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.CheckHasValue(System.Int32)">
+            <summary>値を持っているかどうかを待機ののち確認します。</summary>
+            <param name="timeout">待機時間の上限(ミリ秒)</param>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.CheckHasValue">
+            <summary>値を持っているかどうかを無期限待機ののち確認します。</summary>
+            <returns>値の所持の有無</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.Cancel">
+            <summary>結果取得をキャンセルします。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiFuture.IsRunning">
+            <summary>処理が実行中であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiFuture.IsFinished">
+            <summary>処理が終了済であるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiFuture.IsCanceled">
+            <summary>処理がキャンセル済みであるかを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiFuture.HasError">
+            <summary>エラーが起きたことが確定した場合<see langword="true"/>となります。処理自体が終了していない場合の値は未定義です。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiFuture.ErrorMessage">
+            <summary>エラーがある場合、それを文字列として取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture.AddCallback(System.Action)">
+            <summary>動作完了時のコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiFuture`1">
+            <summary>戻り値のあるQiの非同期呼び出し処理インターフェースを定義します。</summary>
+            <typeparam name="T">呼び出し処理の戻り値の型。何でも指定できるわけではないので気を付けて下さい。(TODO:ドキュメンテーション)</typeparam>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture`1.Get">
+            <summary>
+            呼び出し結果を取得します。
+            型<typeparamref name="T"/>が実際の戻り値と食い違っていたり
+            <see cref="P:Baku.LibqiDotNet.IQiFuture.IsFinished"/>が<see langword="false"/>場合に呼び出すと
+            例外が送出される可能性があります。
+            </summary>
+            <returns>呼び出し結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiFuture`1.AddCallback(System.Action{`0})">
+            <summary>動作完了時のコールバック関数を登録します。</summary>
+            <param name="cb">コールバック関数</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.QiFutureAsyncExtension">
+            <summary>[do NOT use directly]<see cref="T:Baku.LibqiDotNet.IQiFuture"/>の拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiFutureAsyncExtension.GetAwaiter(Baku.LibqiDotNet.IQiFuture)">
+            <summary>[do NOT use directly]<see cref="T:Baku.LibqiDotNet.IQiFuture"/>のAwaiterを取得します。</summary>
+            <param name="future">非同期呼び出し</param>
+            <returns>非同期呼び出しに対応したAwaiter</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.QiFutureAwaiter">
+            <summary>[do NOT use directly]<see cref="T:Baku.LibqiDotNet.IQiFuture"/>クラスへAwaiterパターンの実装を提供します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.QiFutureAwaiter.IsCompleted">
+            <summary>生成元の<see cref="T:Baku.LibqiDotNet.IQiFuture"/>の処理が完了したかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiFutureAwaiter.OnCompleted(System.Action)">
+            <summary><see cref="T:Baku.LibqiDotNet.IQiFuture"/>の処理完了後のコールバックを登録します。TODO: この処理の品質調査</summary>
+            <param name="continuation">継続処理</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiFutureAwaiter.GetResult">
+            <summary>処理完了まで待機し、元の<see cref="T:Baku.LibqiDotNet.IQiFuture"/>を取得します。</summary>
+            <returns>処理結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.QiFutureAwaiter`1">
+            <summary>[do NOT use directly]<see cref="T:Baku.LibqiDotNet.IQiFuture`1"/>クラスに対してAwaiterパターンの実装を提供します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.QiFutureAwaiter`1.IsCompleted">
+            <summary>生成元の<see cref="T:Baku.LibqiDotNet.IQiFuture"/>の処理が完了したかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiFutureAwaiter`1.OnCompleted(System.Action)">
+            <summary><see cref="T:Baku.LibqiDotNet.IQiFuture"/>の処理完了後のコールバックを登録します。TODO: この処理の品質調査</summary>
+            <param name="continuation">継続処理</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.QiFutureAwaiter`1.GetResult">
+            <summary>処理完了まで待機し、生成元の<see cref="T:Baku.LibqiDotNet.IQiFuture"/>に対応した処理結果を取得します。</summary>
+            <returns>処理結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiObject">
+            <summary>Qiのセッションからロード出来る、関数一覧を保持するオブジェクトを表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiObject.Item(System.String)">
+            <summary>メソッド名を指定し、メソッドを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiObject.Name">
+            <summary>サービスの名前を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiObject.Description">
+            <summary>サービスの機能に関する説明文を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiObject.GetProperty``1(System.String)">
+            <summary>オブジェクトのプロパティ名を指定して値を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiObject.SetProperty(System.String,System.Object)">
+            <summary>オブジェクトの指定したプロパティに指定した値を設定します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiResult">
+            <summary>Qiの関数呼び出し結果を表します。結果は組み込み型、リスト、ディクショナリ、オブジェクト、シグナル等のデータ構造を持ちえます。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.Dump">
+            <summary>オブジェクトの内部構造を表す表示用の文字列を取得します。</summary>
+            <returns>オブジェクトの構造を表す文字列。デバッグに使えればよく一意性とか厳密性は不要</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToBool">
+            <summary>格納されているはずのbool値を取得します。</summary>
+            <returns>格納されたbool値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToSByte">
+            <summary>この変数が符号あり1バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToInt16">
+            <summary>この変数が符号あり2バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToInt32">
+            <summary>この変数が符号あり4バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToInt64">
+            <summary>この変数が符号あり8バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToByte">
+            <summary>この変数が符号なし1バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToUInt16">
+            <summary>この変数が符号なし2バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToUInt32">
+            <summary>この変数が符号なし4バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToUInt64">
+            <summary>この変数が符号なし8バイト整数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToFloat">
+            <summary>この変数が単精度小数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToDouble">
+            <summary>この変数が倍精度小数型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToBytes">
+            <summary>この変数がバイナリデータ型であると想定して値を取得します。</summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResult.ToQiString">
+            <summary>
+            この変数が文字列型である場合はその値、そうでない場合は保持している値の型を表す文字列を取得します。
+            NOTE: この関数を実装する際にToStringもToQiStringと同じ結果を返すようにしてほしい
+            </summary>
+            <returns>格納された値</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiResult.Count">
+            <summary>リストやタプルの長さを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiResult.Item(System.Int32)">
+            <summary>リストまたはタプルにインデクスでアクセスします。境界チェックは行われません。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiResult.Item(Baku.LibqiDotNet.IQiResult)">
+            <summary>連想配列にキー要素でアクセスします。キーが連想配列に含まれるかどうかはチェックされません。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiResult.Keys">
+            <summary>連想配列のキー一覧を取得します。連想配列でない値で呼び出すと要素が空の一覧を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiResult.MapItems">
+            <summary>連想配列のキー/値ペア一覧を取得します。連想配列でない値で呼び出すと空の一覧を取得します。</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiResultExtensions">
+            <summary><see cref="T:Baku.LibqiDotNet.IQiResult"/>の拡張メソッドを提供します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiResultExtensions.RecurseDepthLimit">
+            <summary>再帰的に入れ子データを展開する際の再帰深度の上限を取得、設定します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResultExtensions.Get(Baku.LibqiDotNet.IQiResult)">
+            <summary>オブジェクト自身を取り出します。この処理は<see cref="M:Baku.LibqiDotNet.IQiResultExtensions.Get``1(Baku.LibqiDotNet.IQiResult)"/>に対応づける目的で作成しています。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiResultExtensions.Get``1(Baku.LibqiDotNet.IQiResult)">
+            <summary>結果が指定した型である前提で値を取り出します。</summary>
+            <typeparam name="T">組み込み型あるいはbyte[], int[], double[], string[]</typeparam>
+            <returns>対応する型の結果。想定と実際の戻り値が違う場合や上記の型以外では例外をスローします。</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiSession">
+            <summary>接続先との接続を表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.ConnectAsync(System.String)">
+            <summary>指定したアドレスへの接続を試みます。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiSession.IsConnected">
+            <summary>セッションが接続済みになっているかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.Close">
+            <summary>セッションを閉じます。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.GetServiceAsync(System.String)">
+            <summary>サービス名を指定してサービスを取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiSession.IsServiceRegistrationSupported">
+            <summary>インターフェースがサービスの登録/登録解除をサポートしているかを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.ListenAsync(System.String,System.Boolean)">
+            <summary>セッションをリスンします。このメソッドをサポートしない実装では<see cref="T:System.NotSupportedException"/>がスローされます。</summary>
+            <param name="address">リスン先アドレスです。例えばアクセスを制限しない場合は"tcp://0.0.0.0:0"を指定します。</param>
+            <param name="standAlone">アプリケーションがスタンドアロンである場合はtrueにします。通常は設定する必要はありません。</param>
+            <returns>リスン結果への予約。</returns>
+            <exception cref="T:System.NotSupportedException"/>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.RegisterServiceAsync(System.String,Baku.LibqiDotNet.IQiObject)">
+            <summary>サービスに名前を付けて登録します。このメソッドをサポートしない実装では<see cref="T:System.NotSupportedException"/>がスローされます。</summary>
+            <param name="name">登録するサービス名</param>
+            <param name="obj">登録するサービス本体</param>
+            <returns><see cref="M:Baku.LibqiDotNet.IQiSession.UnregisterServiceAsync(System.UInt32)"/>の引数で渡すためのIDをGetUInt64で取得してください。</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.UnregisterServiceAsync(System.UInt32)">
+            <summary>IDを指定し、サービスの登録を解除します。このメソッドをサポートしない実装では<see cref="T:System.NotSupportedException"/>がスローされます。</summary>
+            <param name="idx">解除したいサービスにつけられたID</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSession.GetEndpoints">
+            <summary>
+            セッションのエンドポイント情報を取得します。
+            [TODO]エンドポイントの型情報が分かったら内容をI/F化すること
+            </summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiSessionExtensions">
+            <summary><see cref="T:Baku.LibqiDotNet.IQiSession"/>の拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSessionExtensions.Connect(Baku.LibqiDotNet.IQiSession,System.String)">
+            <summary>指定したアドレスへの接続を試みます。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSessionExtensions.GetService(Baku.LibqiDotNet.IQiSession,System.String)">
+            <summary>サービス名を指定してサービスを取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSessionExtensions.Listen(Baku.LibqiDotNet.IQiSession,System.String,System.Boolean)">
+            <summary>セッションをリスンします。このメソッドをサポートしない実装では<see cref="T:System.NotSupportedException"/>がスローされます。</summary>
+            <param name="session">処理を行うセッション</param>
+            <param name="address">リスン先アドレスです。例えばアクセスを制限しない場合は"tcp://0.0.0.0:0"を指定します。</param>
+            <param name="standAlone">アプリケーションがスタンドアロンである場合はtrueにします。通常は設定する必要はありません。</param>
+            <returns>リスン結果への予約</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSessionExtensions.RegisterService(Baku.LibqiDotNet.IQiSession,System.String,Baku.LibqiDotNet.IQiObject)">
+            <summary>サービスに名前を付けて登録します。このメソッドをサポートしない実装では<see cref="T:System.NotSupportedException"/>がスローされます。</summary>
+            <param name="session">処理を行うセッション</param>
+            <param name="name">登録するサービス名</param>
+            <param name="obj">登録するサービス本体</param>
+            <returns><see cref="M:Baku.LibqiDotNet.IQiSession.UnregisterServiceAsync(System.UInt32)"/>の引数で渡すためのID</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSessionExtensions.UnregisterService(Baku.LibqiDotNet.IQiSession,System.UInt32)">
+            <summary>IDを指定し、サービスの登録を解除します。このメソッドをサポートしない実装では<see cref="T:System.NotSupportedException"/>がスローされます。</summary>
+            <param name="session">処理を行うセッション</param>
+            <param name="idx">解除したいサービスにつけられたID</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiSignal">
+            <summary>Qiのシグナルという、.NETのイベントに相当するオブジェクトを表します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSignal.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>シグナルを受信した場合に実行されるイベントハンドラ相当の関数を登録します。</summary>
+            <param name="handler">シグナル受信時に実行される関数</param>
+            <returns>非同期の処理結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSignal.DisconnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary><see cref="M:Baku.LibqiDotNet.IQiSignal.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})"/>で登録した関数を登録解除します。</summary>
+            <param name="handler">シグナル受信時に実行されるよう登録していた関数</param>
+            <returns>非同期の処理結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiSignalExtensions">
+            <summary><see cref="T:Baku.LibqiDotNet.IQiSignal"/>インターフェースに拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSignalExtensions.Connect(Baku.LibqiDotNet.IQiSignal,System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary>シグナルを受信した場合に実行されるイベントハンドラ相当の関数を登録します。</summary>
+            <param name="signal">操作対象となるシグナルのインスタンス</param>
+            <param name="handler">シグナル受信時に実行される関数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiSignalExtensions.Disconnect(Baku.LibqiDotNet.IQiSignal,System.Action{Baku.LibqiDotNet.IQiResult})">
+            <summary><see cref="M:Baku.LibqiDotNet.IQiSignal.ConnectAsync(System.Action{Baku.LibqiDotNet.IQiResult})"/>で登録した関数を登録解除します。</summary>
+            <param name="signal">操作対象となるシグナルのインスタンス</param>
+            <param name="handler">シグナル受信時に実行されるよう登録していた関数</param>
+        </member>
+        <member name="T:Baku.LibqiDotNet.LibqiTypeCode">
+            <summary>内部的に組み込み型を扱うため、TypeCodeに相当する機能を提供します。</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Boolean">
+            <summary>論理値</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Byte">
+            <summary>符号なし1バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Char">
+            <summary>文字</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Double">
+            <summary>倍精度小数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Empty">
+            <summary>空のデータ</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Int16">
+            <summary>符号あり2バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Int32">
+            <summary>符号あり4バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Int64">
+            <summary>符号あり8バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Object">
+            <summary>オブジェクト型</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.SByte">
+            <summary>符号あり1バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.Single">
+            <summary>単精度小数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.String">
+            <summary>文字列</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.UInt16">
+            <summary>符号なし2バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.UInt32">
+            <summary>符号なし4バイト整数</summary>
+        </member>
+        <member name="F:Baku.LibqiDotNet.LibqiTypeCode.UInt64">
+            <summary>符号なし8バイト整数</summary>
+        </member>
+        <member name="T:Baku.LibqiDotNet.LibqiTypeCodeGetter">
+            <summary>タイプコードの取得処理を提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.LibqiTypeCodeGetter.GetTypeCode(System.Type)">
+            <summary>型を指定して対応するタイプコードを取得します。</summary>
+            <param name="t">型情報</param>
+            <returns>
+            型に対応したタイプコード。
+            特に該当するものがない場合は<see cref="F:Baku.LibqiDotNet.LibqiTypeCode.Object"/>が返されます。
+            </returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiMethod">
+            <summary>Qiのメソッドを表します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.IQiMethod.Name">
+            <summary>メソッド名を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiMethod.CallAsync(System.Object[])">
+            <summary>関数を呼び出します。結果は非同期的に取得します</summary>
+            <param name="args">関数の引数</param>
+            <returns>結果</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiMethod.CallAsync``1(System.Object[])">
+            <summary>関数を呼び出します。結果は非同期的に取得します</summary>
+            <param name="args">関数の引数</param>
+            <returns>結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.IQiMethodExtensions">
+            <summary><see cref="T:Baku.LibqiDotNet.IQiMethod"/>インターフェースの拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiMethodExtensions.Call(Baku.LibqiDotNet.IQiMethod,System.Object[])">
+            <summary>関数を同期的に呼び出します。関数の戻り値は無いか、あったとしても無視されます。</summary>
+            <param name="method">メソッド</param>
+            <param name="args">メソッドの引数</param>
+        </member>
+        <member name="M:Baku.LibqiDotNet.IQiMethodExtensions.Call``1(Baku.LibqiDotNet.IQiMethod,System.Object[])">
+            <summary>関数を同期的に呼び出し、結果を組み込み型あるいはよく用いられる組み込み型の配列として取得します。</summary>
+            <typeparam name="T">戻り値の型</typeparam>
+            <param name="method">メソッド</param>
+            <param name="args">メソッドの引数</param>
+            <returns>関数の呼び出し結果</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2">
+            <summary>値の読み取りのみが許可された辞書データを表します。</summary>
+            <typeparam name="TKey">キーの型</typeparam>
+            <typeparam name="TValue">値の型</typeparam>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>データ元となる辞書によってインスタンスを初期化します。</summary>
+            <param name="source">データ元の辞書</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.Count">
+            <summary>要素数を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.Contains(System.Collections.Generic.KeyValuePair{`0,`1})">
+            <summary>指定したキー、値のペアが含まれているかを取得します。</summary>
+            <param name="pair">含まれるかどうかを検証するキーおよび値のペア</param>
+            <returns>ペアが含まれる場合はtrue</returns>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.ContainsKey(`0)">
+            <summary>指定したキーが含まれるかを取得します。</summary>
+            <param name="key">探索対象のキー</param>
+            <returns>キーが含まれる場合はtrue</returns>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.Item(`0)">
+            <summary>キーを指定して対応する値を取得します。</summary>
+            <param name="key">キー</param>
+            <returns>キーに対応づけられた値</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException"/>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.Keys">
+            <summary>キーの一覧を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.Values">
+            <summary>値の一覧を取得します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2.GetEnumerator">
+            <summary>データに対応した列挙子を取得します。</summary>
+            <returns>データを操作する列挙子</returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Utils.ReadOnlyDictionaryExtensions">
+            <summary><see cref="T:Baku.LibqiDotNet.Utils.ReadOnlyDictionary`2"/>の拡張メソッドを提供します。</summary>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyDictionaryExtensions.ToReadOnlyDictionary``2(System.Collections.Generic.IDictionary{``0,``1})">
+            <summary>ディクショナリから読み取り専用ディクショナリを生成します。</summary>
+            <typeparam name="TKey">キーの型</typeparam>
+            <typeparam name="TValue">値の型</typeparam>
+            <param name="src">生成元となる、読み取り専用ではないディクショナリ</param>
+            <returns></returns>
+        </member>
+        <member name="T:Baku.LibqiDotNet.Utils.ReadOnlyList`1">
+            <summary>値の読み取りのみが許可されているリストを表します。</summary>
+            <typeparam name="T">要素の型</typeparam>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyList`1.#ctor(System.Collections.Generic.IList{`0})">
+            <summary>データ元となるリストによりインスタンスを初期化します。</summary>
+            <param name="source">データ元のリスト</param>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Utils.ReadOnlyList`1.Count">
+            <summary>要素の個数を取得します。</summary>
+        </member>
+        <member name="P:Baku.LibqiDotNet.Utils.ReadOnlyList`1.Item(System.Int32)">
+            <summary>インデクスを指定して要素を取得します。</summary>
+            <param name="index">取得する要素のインデックス</param>
+            <returns>指定したインデックスの要素</returns>
+            <exception cref="T:System.IndexOutOfRangeException"/>
+        </member>
+        <member name="M:Baku.LibqiDotNet.Utils.ReadOnlyList`1.GetEnumerator">
+            <summary>リストを走査する列挙子を取得します。</summary>
+            <returns>リストを走査する列挙子</returns>
+        </member>
+    </members>
+</doc>
